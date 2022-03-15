@@ -18,7 +18,7 @@
 </head>
 <body>
     <div id="appVue">
-        <h1>Sto usando Vue</h1>
+        {{-- <h1>Codice che verrà sostituito con il contenuto di "App.vue"</h1> --}}
     </div>
 
     <script src="{{ asset("js/vue.js") }}"></script>
