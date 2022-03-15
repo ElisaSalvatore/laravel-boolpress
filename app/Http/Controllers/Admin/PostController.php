@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
 class PostController extends Controller
 {
     /**
@@ -48,7 +48,15 @@ class PostController extends Controller
         $post = new Post();
         $post->fill($data);
 
+        // Creazione dello slug
+        // necessario use Illuminate\Support\Str; a inizio pagina
+        $slug = Str::slug($post->title);
+
+        $post->slug = $slug;
+
         $post->save();
+
+        return redirect()->view("admin.posts.index");
     }
 
     /**
