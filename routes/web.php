@@ -20,5 +20,27 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/admin', 'Admin\HomeController@index')->name('admin.home');
+Route::get('/admin', 'Admin\HomeController@index')->name('admin.home')->middleware('auth');
 
+// POSTS ROUTE
+// Route::get('/admin/posts/', 'Admin\PostController@index')->name('admin.post.index')->middleware('auth');
+// Route::get('/admin/posts/create', 'Admin\PostController@index')->name('admin.post.create')->middleware('auth');
+// Route::get('/admin/posts/edit', 'Admin\PostController@index')->name('admin.post.edit')->middleware('auth');
+
+Route::middleware("auth")
+->namespace("Admin")
+->prefix("admin")
+->name("admin.")
+->group(function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/posts/', 'PostController@index')->name('post.index');
+    Route::get('/posts/create', 'PostController@index')->name('post.create');
+    Route::get('/posts/edit', 'PostController@index')->name('post.edit');
+
+//     Route::resource("posts", "PostController");
+});
+
+
+Route::get("{any?}", function () {
+  return view("home");
+})->where("any", ".*");
