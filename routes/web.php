@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
+// Commento questa rotta perchè ho creato la rotta generica {any}, vedi al fondo del file.
+// Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
