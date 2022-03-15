@@ -28,9 +28,7 @@
                         <div class="mb-3">
                             <label>Contenuto</label>
                             <textarea name="content" rows="10" class="form-control @error('content') is-invalid @enderror"
-                            placeholder="Inizia a scrivere qualcosa..." required>
-                                {{ old('content') }}
-                            </textarea>
+                            placeholder="Inizia a scrivere qualcosa..." required>{{ old('content') }}</textarea>
                             @error('content')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
