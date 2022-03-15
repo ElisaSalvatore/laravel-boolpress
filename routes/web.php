@@ -31,12 +31,13 @@ Route::middleware("auth")
 ->prefix("admin")
 ->name("admin.")
 ->group(function () {
-    Route::get('/', 'HomeController@index')->name('home');
-    Route::get('/posts/', 'PostController@index')->name('post.index');
-    Route::get('/posts/create', 'PostController@index')->name('post.create');
-    Route::get('/posts/edit', 'PostController@index')->name('post.edit');
+  Route::get('/', 'HomeController@index')->name('home');
+  // Route::get('/posts/', 'PostController@index')->name('posts.index');
+  // Route::get('/posts/create', 'PostController@index')->name('post.create');
+  // Route::get('/posts/edit', 'PostController@index')->name('post.edit');
 
-//     Route::resource("posts", "PostController");
+  // Creo le rotte di Posts usando ::resource()
+  Route::resource("posts", "PostController");
 });
 
 // Rotta generica creata per evitare l'errore 404 nel caso in cui venga inserita 
