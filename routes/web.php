@@ -39,7 +39,8 @@ Route::middleware("auth")
 //     Route::resource("posts", "PostController");
 });
 
-
+// Rotta generica creata per evitare l'errore 404 nel caso in cui venga inserita 
+// una query che non corrisponde ad una specifica rotta:
 Route::get("{any?}", function () {
   return view("home");
 })->where("any", ".*");

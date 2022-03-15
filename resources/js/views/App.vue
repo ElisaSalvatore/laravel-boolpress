@@ -1,5 +1,6 @@
 <template>
   <div>
+      
       <h1>Benvenuto in Vue.js</h1>
 
         <!-- <ul>
@@ -8,14 +9,14 @@
             </li>
         </ul>  -->
 
-        <ExampleComponentVue></ExampleComponentVue>
+        <!-- <ExampleComponentVue></ExampleComponentVue> -->
   </div>
 </template>
 
 <script>
-import ExampleComponentVue from "../components/ExampleComponent.vue";
+// import ExampleComponentVue from "../components/ExampleComponent.vue";
 export default {
-    components: { ExampleComponentVue },
+    // components: { ExampleComponentVue },
 };
 </script>
 
