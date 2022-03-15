@@ -670,26 +670,8 @@ var staticRenderFns = [
           ]),
           _vm._v(" "),
           _c(
-            "button",
-            {
-              staticClass: "navbar-toggler",
-              attrs: {
-                type: "button",
-                "data-bs-toggle": "collapse",
-                "data-bs-target": "#navbarSupportedContent",
-                "aria-bs-controls": "navbarSupportedContent",
-                "aria-bs-expanded": "false",
-              },
-            },
-            [_c("span", { staticClass: "navbar-toggler-icon" })]
-          ),
-          _vm._v(" "),
-          _c(
             "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "navbarSupportedContent" },
-            },
+            { staticClass: "navbar", attrs: { id: "navbarSupportedContent" } },
             [
               _c("ul", { staticClass: "navbar-nav ms-auto" }),
               _vm._v(" "),
