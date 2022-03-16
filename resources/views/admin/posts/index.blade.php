@@ -27,7 +27,7 @@
                                   <small class="fst-italic">{{ $post->created_at }}</small>
                                 </div>
               
-                                <a class="ms-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
+                                <a class="mx-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
                             </li>
                         @endforeach
                     </ul>
