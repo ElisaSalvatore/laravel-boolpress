@@ -17,7 +17,9 @@ class AddForeignKeyInPostsTable extends Migration
             // FOREIGN KEY USER
             // La tabella si chiama "users" ma nella creazione della colonna uso il singolare "user_id"
             // perchè all'interno della colonna ci sarà un solo id che rappresenterà un solo utente
-            $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("user_id")
+            ->nullable()
+            ->after("slug");
             
             $table->foreign("user_id") // Indico quale colonna è una foreign key
                 ->references("id") // Devo specificare a quale COLONNA fa rifeirmento la foreign key
@@ -26,6 +28,7 @@ class AddForeignKeyInPostsTable extends Migration
             // FOREIGN KEY CATEGORY con versione abbreviata
             $table->foreignId("category_id")
                 ->nullable() //un post potrebbe non avere una categoria associata, è opzionale.
+                ->after("user_id")
                 ->constrained();
         });
     }
