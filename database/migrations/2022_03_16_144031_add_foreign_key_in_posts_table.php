@@ -18,7 +18,7 @@ class AddForeignKeyInPostsTable extends Migration
             // La tabella si chiama "users" ma nella creazione della colonna uso il singolare "user_id"
             // perchè all'interno della colonna ci sarà un solo id che rappresenterà un solo utente
             $table->unsignedBigInteger("user_id")
-            ->nullable()
+            ->nullable() // è solo temporaneo perchè avendo già dei post creati nel db mi darebbe un errore "constrained violation", lo renderemo obbligatorio.
             ->after("slug");
             
             $table->foreign("user_id") // Indico quale colonna è una foreign key
