@@ -6,11 +6,29 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex">
-                    Dettagli post {{ $post->title }}
+                    {{-- Dettagli post {{ $post->title }} --}}
+                    <a href="{{ route('admin.posts.index') }}" class="me-2">
+                        < 
+                    </a>
+
+                    {{ $post->title }}
+
+                    <a class="ms-auto" href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
                 </div>
 
                 <div class="card-body">
-                    {{ $post->content }}
+                    {{-- {{ $post->content }} --}}
+                    <p class="lead">
+                        {!! $post->content !!}
+                    </p>
+          
+                    <div class="my-3">
+                        Data creazione: {{ $post->created_at }}
+                        <br>
+                        Data ultima modifica: {{ $post->updated_at }}
+                        <br>
+                        Slug: {{ $post->slug }}
+                    </div>
                 </div>
             </div>
         </div>

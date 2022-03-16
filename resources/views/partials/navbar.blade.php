@@ -10,12 +10,21 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            {{-- <ul class="navbar-nav mr-auto">
-                Boolpress
-            </ul> --}}
+            <ul class="navbar-nav ms-auto me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.posts.index') }}" role="button">
+                        Posts
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.users.index') }}" role="button">
+                        Users
+                    </a>
+                </li>
+            </ul>
 
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav">
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
@@ -27,11 +36,6 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.posts.index')}}" role="button">
-                            Post
-                        </a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} 

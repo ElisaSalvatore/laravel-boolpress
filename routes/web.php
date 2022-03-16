@@ -38,6 +38,8 @@ Route::middleware("auth")
 
   // Creo le rotte di Posts usando ::resource()
   Route::resource("posts", "PostController");
+  // Creo le rotte di Users usando ::resource()
+  Route::get("users", "UserController@index")->name("users.index");
 });
 
 // Rotta generica creata per evitare l'errore 404 nel caso in cui venga inserita 
