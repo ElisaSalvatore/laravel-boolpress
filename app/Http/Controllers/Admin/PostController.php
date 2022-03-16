@@ -86,9 +86,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        // uso where() perche con l'independent injection è possibile passare solamente $id, ma noi stiamo passando lo $slug
+        $post = Post::where("slug", $slug)->first(); 
+
+        return view("admin.posts.show", compact("post"));
     }
 
     /**
@@ -120,30 +123,33 @@ class PostController extends Controller
         // Se l'utente modifica il titolo del post, di conseguenza cambia anche lo slug:
         // in questo caso viene generato un nuovo slug!  
         if($data["title"]!== $post->title) {
-            // Genero lo slug partendo dal titolo
-            $slug = Str::slug($data["title"]);
-            // Controllo a database se esiste già un elemento con lo stesso slug
-            $exists = Post::where("slug", $slug)->first();
-            $counter = 1; //si crea il counter per incrementare lo slug nel caso in cui 
-            //se ne dovrebbe creare uno con uno slug già esistente.
 
-            // Se uno Slug creato dovesse già esistere eseguo il while):
-            while($exists) {
-                // Genero un nuovo Slug prendendo quello precedente e concatenando un numero incrementale
-                $newSlug = $slug . "-" . $counter;
-                $counter++;
-                // Controllo a database se esiste già un elemento con il nuovo slug appena esagerato
-                $exists = Post::where("slug", $newSlug)->first();
+            // // Genero lo slug partendo dal titolo
+            // $slug = Str::slug($data["title"]);
+            // // Controllo a database se esiste già un elemento con lo stesso slug
+            // $exists = Post::where("slug", $slug)->first();
+            // $counter = 1; //si crea il counter per incrementare lo slug nel caso in cui 
+            // //se ne dovrebbe creare uno con uno slug già esistente.
 
-                // Se non esiste, salvo il nuovo slug nella variabile $slug che verrà poi 
-                //usata per assegnare il valore all'interno del nuovo post.
-                if(!$exists) {
-                    $slug = $newSlug;
-                }
-            }
+            // // Se uno Slug creato dovesse già esistere eseguo il while):
+            // while($exists) {
+            //     // Genero un nuovo Slug prendendo quello precedente e concatenando un numero incrementale
+            //     $newSlug = $slug . "-" . $counter;
+            //     $counter++;
+            //     // Controllo a database se esiste già un elemento con il nuovo slug appena esagerato
+            //     $exists = Post::where("slug", $newSlug)->first();
+
+            //     // Se non esiste, salvo il nuovo slug nella variabile $slug che verrà poi 
+            //     //usata per assegnare il valore all'interno del nuovo post.
+            //     if(!$exists) {
+            //         $slug = $newSlug;
+            //     }
+            // }
 
             // $post->slug = $slug; //oppure in alternativa:
-            $data["slug"] = $slug;
+            // $data["slug"] = $slug;
+
+            $data["slug"] = $this->generateUniqueSlug($data["title"]);
         }
 
         $post->update($data);
@@ -160,5 +166,32 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // FUNZIONE DELLO SLUG con l'obiettivo di non ripetere codice uguale
+    protected function generateUniqueSlug($postTitle) {
+        // Genero lo slug partendo dal titolo
+        $slug = Str::slug($postTitle);
+        // Controllo a database se esiste già un elemento con lo stesso slug
+        $exists = Post::where("slug", $slug)->first();
+        $counter = 1; //si crea il counter per incrementare lo slug nel caso in cui 
+        //se ne dovrebbe creare uno con uno slug già esistente.
+
+        // Se uno Slug creato dovesse già esistere eseguo il while):
+        while($exists) {
+            // Genero un nuovo Slug prendendo quello precedente e concatenando un numero incrementale
+            $newSlug = $slug . "-" . $counter;
+            $counter++;
+            // Controllo a database se esiste già un elemento con il nuovo slug appena esagerato
+            $exists = Post::where("slug", $newSlug)->first();
+
+            // Se non esiste, salvo il nuovo slug nella variabile $slug che verrà poi 
+            //usata per assegnare il valore all'interno del nuovo post.
+            if(!$exists) {
+                $slug = $newSlug;
+            }
+        }
+
+        return $slug;
     }
 }
