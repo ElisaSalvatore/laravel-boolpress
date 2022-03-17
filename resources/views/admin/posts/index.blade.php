@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header d-flex">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     Lista dei post
 
                     {{-- Bottone per la creazione di un nuovo post --}}
@@ -20,14 +20,14 @@
                                 <a class="ml-4"href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
                             </li> --}}
 
-                            <li class="list-group-item d-flex align-items-center">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
                                   {{ $post->title }}
                                   <br>
                                   <small class="fst-italic">{{ $post->created_at }}</small>
                                 </div>
               
-                                <a class="mx-auto" href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
+                                <a href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
                             </li>
                         @endforeach
                     </ul>

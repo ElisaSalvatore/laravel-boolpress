@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 class PostController extends Controller
 {
@@ -75,9 +76,12 @@ class PostController extends Controller
         // Assegno il valore di slug al nuovo post
         $post->slug = $slug;
 
+        // Per recuperare l'id dell'utente loggato
+        $post->user_id = Auth::user()->id;
+
         $post->save();
 
-        return redirect()->view("admin.posts.index");
+        return redirect()->route("admin.posts.index");
     }
 
     /**
