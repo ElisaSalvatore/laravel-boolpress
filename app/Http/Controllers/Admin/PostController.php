@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -107,8 +108,14 @@ class PostController extends Controller
     public function edit($slug)
     {
         $post = Post::where("slug", $slug)->first();
+        // Per recuperare i dati della tabella categories da db
+        $categories = Category::all();
 
-        return view("admin.posts.edit", compact("post"));
+        // Al return vado a passare due variabili (array)
+        return view("admin.posts.edit", [
+            "post" => $post,
+            "categories" => $categories
+        ]);
     }
 
     /**
@@ -123,6 +130,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title"=> "required|min:5",
             "content"=> "required|min:20",
+            "category_id" => "nullable",
         ]);
         $post = Post::findOrFail($id);
 
@@ -157,7 +165,7 @@ class PostController extends Controller
 
             $data["slug"] = $this->generateUniqueSlug($data["title"]);
         }
-
+        
         $post->update($data);
 
         // return redirect()->route("admin.posts.show", $post->$id);

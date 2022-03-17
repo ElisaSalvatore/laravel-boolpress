@@ -34,10 +34,19 @@
                         Slug: {{ $post->slug }}
                     </div>
 
-                    <div>
+                    <div class="my-3">
                         Creato da: {{ $post->user->name }}
                         <br>
                         Email utente: {{ $post->user->email }}
+                    </div>
+
+                    <div class="my-3">
+                        {{-- Essendo nullable, se esiste stampa il blocco categoria sennò non stampare niente --}}
+                        @if (isset($post->category))
+                            Categoria: {{ $post->category->code }}
+                            <br>
+                            Descrizione: {{ $post->category->description}}
+                        @endif
                     </div>
                 </div>
             </div>
