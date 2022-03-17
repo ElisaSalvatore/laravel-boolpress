@@ -33,7 +33,20 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-          
+                        
+                        {{-- Creo la select per le categorie --}}
+                        <div class="mb-3">
+                            <label>Categoria:</label>
+                            <select name="category_id" class="form-select">
+                            <option value=""> -- nessuna categoria -- </option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" @if (old('category_id') === $category->id) selected @endif>
+                                {{ $category->code }}
+                                </option>
+                            @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group">
                           <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Annulla</a>
                           <button type="submit" class="btn btn-success">Salva post</button>

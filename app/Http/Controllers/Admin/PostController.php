@@ -28,7 +28,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("admin.posts.create");
+        // Per recuperare i dati della tabella categories da db
+        $categories = Category::all();
+
+        return view("admin.posts.create", compact("categories"));
     }
 
     /**
@@ -42,6 +45,7 @@ class PostController extends Controller
         $data = $request->validate([
             "title"=> "required|min:5",
             "content"=> "required|min:20",
+            "category_id"=> "nullable",
         ]);
         
         // dd($data);
