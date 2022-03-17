@@ -17,7 +17,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // L'utente loggato può vedere i post di tutti, sia i suoi che quelli degli altri utenti:
+        // $posts = Post::all();
+        // L'utente loggato può vedere SOLO i post creati da se stesso:
+        $posts = Post::where("user_id", Auth::user()->id)->get();
+
         return view("admin.posts.index", compact("posts"));
     }
 
