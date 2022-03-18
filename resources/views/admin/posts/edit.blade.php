@@ -49,6 +49,22 @@
                 </select>
               </div>
 
+              {{-- Creo il form checkbox per i tags --}}
+              <div class="mb-3">
+                <label >Tags: </label>
+                @foreach ($tags as $tag)
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" value="{{ $tag->id }}"
+                  id="tag_{{ $tag->id }}" name="tags[]" 
+                  {{-- Se i tags di questo post contengono il tag che sto ciclando in questo momento 
+                    allora `checked`, altrimenti lascio vuoto. --}}
+                  {{ $post->tags->contains($tag) ? 'checked' : '' }}
+                  >
+                  <label class="form-check-label">{{ $tag->name }}</label>
+                </div>
+                @endforeach
+              </div>
+
               <div class="form-group">
                 <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-secondary">Annulla</a>
                 <button type="submit" class="btn btn-success">Salva post</button>

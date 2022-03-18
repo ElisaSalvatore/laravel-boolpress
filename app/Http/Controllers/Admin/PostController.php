@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -34,8 +35,10 @@ class PostController extends Controller
     {
         // Per recuperare i dati della tabella categories da db
         $categories = Category::all();
+        // Per recuperare i dati della tabella tags da db
+        $tags = Tag::all();
 
-        return view("admin.posts.create", compact("categories"));
+        return view("admin.posts.create", compact("categories", "tags"));
     }
 
     /**
@@ -50,6 +53,7 @@ class PostController extends Controller
             "title"=> "required|min:5",
             "content"=> "required|min:20",
             "category_id"=> "nullable",
+            "tags" => "nullable"
         ]);
         
         // dd($data);
@@ -90,6 +94,11 @@ class PostController extends Controller
 
         $post->save();
 
+        // Per il post corrente, aggiungo le relazioni con i tag ricevuti
+        // E' essenziale che attach avvenga SOLO DOPO che il post è stato salvato,
+        // Altrimenti non avremo l'id del nuovo post, in quanto questo viene creato nel momento del salvataggio.
+        $post->tags()->attach($data["tags"]);
+
         return redirect()->route("admin.posts.index");
     }
 
@@ -118,11 +127,14 @@ class PostController extends Controller
         $post = Post::where("slug", $slug)->first();
         // Per recuperare i dati della tabella categories da db
         $categories = Category::all();
+        // Per recuperare i dati della tabella tags da db
+        $tags = Tag::all();
 
-        // Al return vado a passare due variabili (array)
+        // Al return vado a passare un array di variabili
         return view("admin.posts.edit", [
             "post" => $post,
-            "categories" => $categories
+            "categories" => $categories,
+            "tags" => $tags,
         ]);
     }
 
@@ -139,6 +151,7 @@ class PostController extends Controller
             "title"=> "required|min:5",
             "content"=> "required|min:20",
             "category_id" => "nullable",
+            "tags" => "nullable",
         ]);
         $post = Post::findOrFail($id);
 
@@ -176,9 +189,14 @@ class PostController extends Controller
         
         $post->update($data);
 
+        // Aggiorniamo anche la tabella poste post_tag
+       // Per il post corrente, rimuovo tutte le relazioni dalla tabella ponte
+       $post->tags()->detach();
+       // Per il post corrente, aggiungo le relazioni con i tag ricevuti dall'edit dell'utente
+       $post->tags()->attach($data["tags"]);
+
         // return redirect()->route("admin.posts.show", $post->$id);
         return redirect()->route("admin.posts.show", $post->slug);
-
     }
 
     /**
@@ -189,7 +207,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $post->tags()->detach();
+
+        $post->destroy();
     }
 
     // FUNZIONE DELLO SLUG con l'obiettivo di non ripetere codice uguale
