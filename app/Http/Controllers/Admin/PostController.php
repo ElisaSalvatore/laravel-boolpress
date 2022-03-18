@@ -189,11 +189,15 @@ class PostController extends Controller
         
         $post->update($data);
 
-        // Aggiorniamo anche la tabella poste post_tag
-       // Per il post corrente, rimuovo tutte le relazioni dalla tabella ponte
-       $post->tags()->detach();
-       // Per il post corrente, aggiungo le relazioni con i tag ricevuti dall'edit dell'utente
-       $post->tags()->attach($data["tags"]);
+        // Aggiorniamo anche la tabella ponte POST_TAG
+        // ATTACH E DETACH
+        // Per il post corrente, rimuovo tutte le relazioni dalla tabella ponte
+        //$post->tags()->detach();
+        // Per il post corrente, aggiungo le relazioni con i tag ricevuti dall'edit dell'utente
+        //$post->tags()->attach($data["tags"]);
+
+        // SYNC
+        $post->tags()->sync($data["tags"]);
 
         // return redirect()->route("admin.posts.show", $post->$id);
         return redirect()->route("admin.posts.show", $post->slug);
