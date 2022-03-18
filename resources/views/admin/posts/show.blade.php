@@ -47,6 +47,16 @@
                             <br>
                             Descrizione: {{ $post->category->description}}
                         @endif
+                        
+                        {{-- Essendo nullable, se esiste stampa il blocco categoria sennò non stampare niente --}}
+                        @if ($post->category !== null)
+                            <div class="my-3">
+                                Tags:
+                                @foreach ($post->tags as $tag)
+                                <span class="bg-light">{{ $tag->name }}</span>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

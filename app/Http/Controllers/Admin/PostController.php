@@ -150,8 +150,10 @@ class PostController extends Controller
         $data = $request->validate([
             "title"=> "required|min:5",
             "content"=> "required|min:20",
-            "category_id" => "nullable",
-            "tags" => "nullable",
+            // Validazione categories
+            "category_id" => "nullable|exists:tags,id",
+            // Validazione tags
+            "tags" => "nullable|exists:tags,id",
         ]);
         $post = Post::findOrFail($id);
 
@@ -189,17 +191,19 @@ class PostController extends Controller
         
         $post->update($data);
 
-        // Aggiorniamo anche la tabella ponte POST_TAG
-        // ATTACH E DETACH
-        // Per il post corrente, rimuovo tutte le relazioni dalla tabella ponte
-        //$post->tags()->detach();
-        // Per il post corrente, aggiungo le relazioni con i tag ricevuti dall'edit dell'utente
-        //$post->tags()->attach($data["tags"]);
+        if (key_exists("tags", $data)) {
+            // Aggiorniamo anche la tabella ponte POST_TAG
+            // SYNC
+            $post->tags()->sync($data["tags"]);
 
-        // SYNC
-        $post->tags()->sync($data["tags"]);
-
-        // return redirect()->route("admin.posts.show", $post->$id);
+            // ATTACH E DETACH
+            // Per il post corrente, rimuovo tutte le relazioni dalla tabella ponte
+            //$post->tags()->detach();
+            // Per il post corrente, aggiungo le relazioni con i tag ricevuti dall'edit dell'utente
+            //$post->tags()->attach($data["tags"]);
+        }
+        
+        // return redirect()->route("admin.\posts.show", $post->$id);
         return redirect()->route("admin.posts.show", $post->slug);
     }
 

@@ -63,6 +63,10 @@
                   <label class="form-check-label">{{ $tag->name }}</label>
                 </div>
                 @endforeach
+
+                @error('tags')
+                  <div class="text">{{ $message }}</div>
+                @enderror
               </div>
 
               <div class="form-group">
