@@ -27,8 +27,19 @@
                                   <small class="fst-italic">{{ $post->created_at }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }} </small>
                                                                                                                 {{-- se c'è un actegoria selezionata stampa il code, altrimenti stampa "senza categoria"--}}
                                 </div>
-              
-                                <a href="{{ route('admin.posts.show', $post->slug) }}">Mostra</a>
+                                
+                                <div class="ms-auto">
+                                    <a href="{{ route('admin.posts.show', $post->slug) }}>
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a class="mx-3 text-dark" href="{{ route('admin.posts.edit', $post->slug) }}>
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    @include('partials.deleteBtn', [
+                                        'id' => $post->id,
+                                        'route' => 'admin.posts.destroy',
+                                    ])
+                                </div>
                             </li>
                         @endforeach
                     </ul>

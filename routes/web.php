@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/admin', 'Admin\HomeController@index')->name('admin.home')->middleware('auth');
+// Route::get('/admin', 'Admin\HomeController@index')->name('admin.home')->middleware('auth');
 
 // POSTS ROUTE
 // Route::get('/admin/posts/', 'Admin\PostController@index')->name('admin.post.index')->middleware('auth');
@@ -39,7 +39,8 @@ Route::middleware("auth")
   // Creo le rotte di Posts usando ::resource()
   Route::resource("posts", "PostController");
   // Creo le rotte di Users usando ::resource()
-  Route::get("users", "UserController@index")->name("users.index");
+  Route::resource("users", "UserController");
+  // Route::get("users", "UserController@index")->name("users.index");
 });
 
 // Rotta generica creata per evitare l'errore 404 nel caso in cui venga inserita 

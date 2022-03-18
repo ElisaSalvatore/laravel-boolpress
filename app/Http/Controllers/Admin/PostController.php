@@ -219,7 +219,10 @@ class PostController extends Controller
 
         $post->tags()->detach();
 
-        $post->destroy();
+        // $post->destroy();
+        $post->delete();
+
+        return redirect()->route("admin.posts.index");
     }
 
     // FUNZIONE DELLO SLUG con l'obiettivo di non ripetere codice uguale
