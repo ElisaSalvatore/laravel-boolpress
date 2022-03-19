@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -28,12 +28,19 @@
           
                     <div class="my-3">
                         @php
+                            // * Se utilizzo il metodo inline o la data pura di Php, 
+                            // NON mi serve importare la libreria Carbon da Php
                             use Carbon\Carbon;
+
+                            // Creo una variabile per il formato data 
+                            $dateFormat = "d-m-Y H:i";
                         @endphp
 
-                        Data creazione: {{ $post->created_at->format("d-m-Y H:i") }}
+                        Data creazione: {{ $post->created_at->format($dateFormat) }}
                         <br>
-                        Data ultima modifica: {{ $post->updated_at->diffForHumans(Carbon::now()) }}
+                        Data ultima modifica: {{ $post->updated_at->format($dateFormat) }} ( {{ $post->updated_at->diffForHumans(Carbon::now()) }} )
+                        {{-- metodo inline * : {{ $post->updated_at->diffForHumans(Carbon\Carbon::now()) }} --}}
+                        {{-- data pura da PHP * : {{ $post->updated_at->diffForHumans(date(0)) }} --}}
                         <br>
                         Slug: {{ $post->slug }}
                     </div>
@@ -47,7 +54,7 @@
                     <div class="my-3">
                         {{-- Essendo nullable, se esiste stampa il blocco categoria sennò non stampare niente --}}
                         @if (isset($post->category))
-                            Categoria: {{ $post->category->code }}
+                            Categoria: <span class="text-success">{{ $post->category->code }}</span>
                             <br>
                             Descrizione: {{ $post->category->description}}
                         @endif
@@ -57,7 +64,7 @@
                             <div class="my-3">
                                 Tags:
                                 @foreach ($post->tags as $tag)
-                                <span class="bg-light">{{ $tag->name }}</span>
+                                <span class="bg-warning p-1 rounded">{{ $tag->name }}</span>
                                 @endforeach
                             </div>
                         @endif

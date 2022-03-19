@@ -38,7 +38,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Per evitare che ci stiano delle rotte che puntino a funzioni inesistenti (errore 500)
+        return redirect()->route("admin.users.index");
     }
 
     /**
@@ -47,9 +48,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view("admin.users.show", compact("user"));
     }
 
     /**
@@ -58,9 +59,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view("admin.users.edit", compact("user"));
     }
 
     /**
@@ -72,7 +73,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $data = $request->validate([
+            "name" => "required|min:2",
+            // Nell' "unique" specifico in quale tabella si trova e in quale colonna.
+            // Per far sì che la mail sia unica concateno l'"id" in modo tale che 
+            // durante la ricerca per vedere se l'email è già in uso tra gli altri utenti registrati
+            // ma ignora l'id dell'utente che si sta analizzando.
+            "email" => "required|email|unique:users,email," . $id
+        ]);
+
+        $user->update($data);
+
+        return redirect()->route("admin.users.show", $user->id);
     }
 
     /**

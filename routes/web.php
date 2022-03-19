@@ -38,6 +38,7 @@ Route::middleware("auth")
 
   // Creo le rotte di Posts usando ::resource()
   Route::resource("posts", "PostController");
+  
   // Creo le rotte di Users usando ::resource()
   Route::resource("users", "UserController");
   // Route::get("users", "UserController@index")->name("users.index");
