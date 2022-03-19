@@ -22,9 +22,11 @@
 
                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div>
-                                  {{ $post->title }}
-                                                                                                                {{-- nello stampare la categoria facciamo un IF, perchè potrebbe non averla --}}
-                                  <small class="fst-italic">{{ $post->created_at }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }} </small>
+                                    <a href="{{ route('admin.posts.show', $post->slug) }}" class="text-dark">
+                                        {{ $post->title }}
+                                    </a>
+                                    {{-- nello stampare la categoria facciamo un IF, perchè potrebbe non averla --}}
+                                    <small class="fst-italic">{{ $post->created_at }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }} </small>
                                                                                                                 {{-- se c'è un actegoria selezionata stampa il code, altrimenti stampa "senza categoria"--}}
                                 </div>
                                 

@@ -8,10 +8,10 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     {{-- Dettagli post {{ $post->title }} --}}
                     <div>
-                        <a href="{{ route('admin.posts.index') }}" class="mr-2">
+                        <a href="{{ route('admin.posts.index') }}" class="btn btn-link">
                             <i class="fa-solid fa-arrow-left"></i>
                         </a>
-    
+                        
                         {{ $post->title }}
                     </div>
                     
