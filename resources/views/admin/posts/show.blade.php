@@ -9,7 +9,7 @@
                     {{-- Dettagli post {{ $post->title }} --}}
                     <div>
                         <a href="{{ route('admin.posts.index') }}" class="mr-2">
-                            < 
+                            <i class="fa-solid fa-arrow-left"></i>
                         </a>
     
                         {{ $post->title }}

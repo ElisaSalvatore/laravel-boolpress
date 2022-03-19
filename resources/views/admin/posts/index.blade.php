@@ -29,10 +29,10 @@
                                 </div>
                                 
                                 <div class="ms-auto">
-                                    <a href="{{ route('admin.posts.show', $post->slug) }}>
+                                    <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-link" title="Mostra" >
                                         <i class="fa-solid fa-eye"></i>
                                     </a>
-                                    <a class="mx-3 text-dark" href="{{ route('admin.posts.edit', $post->slug) }}>
+                                    <a href="{{ route('admin.posts.edit', $post->slug) }}" class="btn btn-secondary-dark" title="Modifica">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
                                     @include('partials.deleteBtn', [

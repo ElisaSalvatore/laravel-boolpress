@@ -1,4 +1,4 @@
-<form action="{{ route($route), $id }}" method="POST" class="display-inline-block">
+<form action="{{ route($route, $id) }}" method="POST" class="d-inline-block">
     @csrf
     @method("delete")
 
