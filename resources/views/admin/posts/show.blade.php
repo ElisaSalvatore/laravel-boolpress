@@ -27,9 +27,13 @@
                     </p>
           
                     <div class="my-3">
-                        Data creazione: {{ $post->created_at }}
+                        @php
+                            use Carbon\Carbon;
+                        @endphp
+
+                        Data creazione: {{ $post->created_at->format("d-m-Y H:i") }}
                         <br>
-                        Data ultima modifica: {{ $post->updated_at }}
+                        Data ultima modifica: {{ $post->updated_at->diffForHumans(Carbon::now()) }}
                         <br>
                         Slug: {{ $post->slug }}
                     </div>

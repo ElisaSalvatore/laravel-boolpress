@@ -26,7 +26,7 @@
                                         {{ $post->title }}
                                     </a>
                                     {{-- nello stampare la categoria facciamo un IF, perchè potrebbe non averla --}}
-                                    <small class="fst-italic">{{ $post->created_at }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }} </small>
+                                    <small class="fst-italic">{{ $post->created_at->format("d-m-Y") }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }} </small>
                                                                                                                 {{-- se c'è un actegoria selezionata stampa il code, altrimenti stampa "senza categoria"--}}
                                 </div>
                                 
