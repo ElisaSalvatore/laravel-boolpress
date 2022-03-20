@@ -38,6 +38,12 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{-- Immagine navabr --}}
+                            @if (Auth::user()->infoUser)
+                                <img src="{{ Auth::user()->infoUser->avatar ?? 'https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png' }}" class="rounded-circle"
+                                style="width:48px;width: 36px;margin-top: -12px;margin-bottom: -12px; margin-right: 5px;">
+                            @endif
+                            {{-- Nome utente navabar--}}
                             {{ Auth::user()->name }} 
                         </a>
 

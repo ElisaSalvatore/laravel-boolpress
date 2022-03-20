@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\InfoUser;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route("admin.users.index");
     }
 
     /**
@@ -81,10 +82,25 @@ class UserController extends Controller
             // Per far sì che la mail sia unica concateno l'"id" in modo tale che 
             // durante la ricerca per vedere se l'email è già in uso tra gli altri utenti registrati
             // ma ignora l'id dell'utente che si sta analizzando.
-            "email" => "required|email|unique:users,email," . $id
+            "email" => "required|email|unique:users,email," . $id,
+            "phone" => "nullable",
+            "address" => "nullable",
+            "avatar" => "nullable",
         ]);
 
         $user->update($data);
+
+          // Creiamo le infoUser se queste non esistono ancora
+        if (!$user->infoUser) {
+            $infoUser = new InfoUser();
+            $infoUser->fill($data);
+            
+            $user->infoUser()->save($infoUser);
+        } else {
+            // se invece esistono già, le si aggiornano
+            $user->infoUser->fill($data);
+            $user->infoUser->save();
+        }
 
         return redirect()->route("admin.users.show", $user->id);
     }

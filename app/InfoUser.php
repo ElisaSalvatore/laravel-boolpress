@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class InfoUser extends Model
-{
+class InfoUser extends Model {
+    protected $fillable = ["address", "avatar", "phone"];
+
    // RELAZIONE ONE TO ONE CON MODEL User
    public function user() {
         return $this->belongsTo("App\User");

@@ -53,7 +53,7 @@ class PostController extends Controller
             "title"=> "required|min:5",
             "content"=> "required|min:20",
             "category_id"=> "nullable",
-            "tags" => "nullable"
+            "tags" => "nullable",
         ]);
         
         // dd($data);
@@ -97,8 +97,11 @@ class PostController extends Controller
         // Per il post corrente, aggiungo le relazioni con i tag ricevuti
         // E' essenziale che attach avvenga SOLO DOPO che il post è stato salvato,
         // Altrimenti non avremo l'id del nuovo post, in quanto questo viene creato nel momento del salvataggio.
-        $post->tags()->attach($data["tags"]);
-
+        // $post->tags()->attach($data["tags"]);
+        if (key_exists("tags",$data)) {
+            $post->tags()->attach($data["tags"]);
+        }
+        
         return redirect()->route("admin.posts.index");
     }
 
