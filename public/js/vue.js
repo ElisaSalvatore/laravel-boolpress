@@ -1921,6 +1921,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     post: Object
@@ -2524,27 +2544,81 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col" }, [
-    _c("div", { staticClass: "card my-3", staticStyle: { height: "400px" } }, [
-      _c("img", {
-        staticClass: "card-img-top",
-        staticStyle: { height: "280px" },
-        attrs: { src: _vm.getPostCover(_vm.post), alt: "post images" },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.post.title)),
+    _c(
+      "div",
+      { staticClass: "card my-3", staticStyle: { "min-height": "400px" } },
+      [
+        _c("img", {
+          staticClass: "card-img-top",
+          staticStyle: { height: "280px" },
+          attrs: { src: _vm.getPostCover(_vm.post), alt: "post images" },
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.post.title)),
+          ]),
+          _vm._v(" "),
+          _c("p", {
+            staticClass: "card-text",
+            domProps: { innerHTML: _vm._s(_vm.post.content) },
+          }),
+          _vm._v(" "),
+          _c("em", [
+            _vm._v(
+              "Autore: " + _vm._s(_vm.post.user.name) + "\n                "
+            ),
+            _c("br"),
+            _vm._v(
+              "\n                Data: " +
+                _vm._s(_vm.post.created_at) +
+                "\n            "
+            ),
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _vm.post.category
+            ? _c("div", { staticClass: "my-2" }, [
+                _c(
+                  "span",
+                  { staticClass: "bg-success rounded-pill p-1 text-white" },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.post.category.code) +
+                        "\n                "
+                    ),
+                  ]
+                ),
+              ])
+            : _vm._e(),
         ]),
         _vm._v(" "),
-        _c("p", {
-          staticClass: "card-text",
-          domProps: { innerHTML: _vm._s(_vm.post.content) },
-        }),
-      ]),
-    ]),
+        _vm._m(0),
+      ]
+    ),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "card-footer d-flex justify-content-end align-items-center",
+      },
+      [
+        _c("a", { attrs: { href: "#", title: "Mostra dettagli del post" } }, [
+          _vm._v("Dettagli"),
+        ]),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 

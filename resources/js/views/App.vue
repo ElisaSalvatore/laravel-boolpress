@@ -25,7 +25,7 @@ export default {
     components: {TheNavbar, PostCard},
     data() {
         return {
-            posts: []
+            posts: [],
         }
     },
     mounted() {

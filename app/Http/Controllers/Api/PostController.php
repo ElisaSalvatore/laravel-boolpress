@@ -13,6 +13,9 @@ class PostController extends Controller {
     public function index() {
         $posts = Post::all();
 
+        // Per poter leggere e stampare in Vue i dettagli dello user 
+        $posts->load("user", "category", "tags");
+
         // Ritornare i dati tramite JSON
         return response()->json($posts);
     }
