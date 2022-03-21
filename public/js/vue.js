@@ -1979,6 +1979,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2000,6 +2001,11 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts").then(function (response) {
         _this.posts = response.data;
       });
+    },
+    getPostCover: function getPostCover(post) {
+      var _post$coverImg;
+
+      return (_post$coverImg = post.coverImg) !== null && _post$coverImg !== void 0 ? _post$coverImg : 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png';
     }
   }
 });
@@ -2564,7 +2570,7 @@ var render = function () {
               _c("div", { staticClass: "card my-3" }, [
                 _c("img", {
                   staticClass: "card-img-top",
-                  attrs: { src: "", alt: "post images" },
+                  attrs: { src: _vm.getPostCover(post), alt: "post images" },
                 }),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
