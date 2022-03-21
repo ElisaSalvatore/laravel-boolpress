@@ -1941,6 +1941,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     post: Object
@@ -2031,6 +2032,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2041,7 +2063,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      posts: []
+      posts: [],
+      pagination: {}
     };
   },
   mounted: function mounted() {
@@ -2051,8 +2074,19 @@ __webpack_require__.r(__webpack_exports__);
     fetchPosts: function fetchPosts() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts").then(function (response) {
-        _this.posts = response.data;
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+      if (page < 1) {
+        page = 1;
+      }
+
+      if (page > this.pagination.last_page) {
+        page = this.pagination.last_page;
+      }
+
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts?page=" + page).then(function (response) {
+        _this.pagination = response.data;
+        _this.posts = response.data.data;
       });
     }
   }
@@ -2546,7 +2580,7 @@ var render = function () {
   return _c("div", { staticClass: "col" }, [
     _c(
       "div",
-      { staticClass: "card my-3", staticStyle: { "min-height": "400px" } },
+      { staticClass: "card my-3", staticStyle: { "max-height": "450px" } },
       [
         _c("img", {
           staticClass: "card-img-top",
@@ -2707,6 +2741,14 @@ var render = function () {
       _c("div", { staticClass: "container py-4" }, [
         _c("h1", [_vm._v("Benvenut* nel Vue Blog!")]),
         _vm._v(" "),
+        _c("div", { staticClass: "d-flex justify-content-end" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-primary", on: { click: _vm.fetchPosts } },
+            [_vm._v("\n                Refresh\n            ")]
+          ),
+        ]),
+        _vm._v(" "),
         _c(
           "div",
           { staticClass: "row row-cols-1 row-cols-md-2 g-4" },
@@ -2715,6 +2757,63 @@ var render = function () {
           }),
           1
         ),
+        _vm._v(" "),
+        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _c("li", { staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    on: {
+                      click: function ($event) {
+                        return _vm.fetchPosts(_vm.pagination.current_page - 1)
+                      },
+                    },
+                  },
+                  [_vm._v("Previous")]
+                ),
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.pagination.last_page, function (page) {
+                return _c("li", { key: page, staticClass: "page-item" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      on: {
+                        click: function ($event) {
+                          return _vm.fetchPosts(page)
+                        },
+                      },
+                    },
+                    [_vm._v(_vm._s(page))]
+                  ),
+                ])
+              }),
+              _vm._v(" "),
+              _c("li", { staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.fetchPosts(_vm.pagination.current_page + 1)
+                      },
+                    },
+                  },
+                  [_vm._v("Next")]
+                ),
+              ]),
+            ],
+            2
+          ),
+        ]),
       ]),
     ],
     1
