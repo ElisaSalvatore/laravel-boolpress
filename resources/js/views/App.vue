@@ -4,25 +4,32 @@
 
         <div class="container py-4">
             <h1 class="p-4">Benvenuto in Vue.js</h1>
-
-            <!-- <ul>
-                <li v-for="i in 10 " :key="i"> 
-                    {{ i }}
-                </li>
-            </ul>  -->
-
-            <!-- <ExampleComponentVue></ExampleComponentVue> -->
         </div>
       
     </div>
 </template>
 
 <script>
-// import ExampleComponentVue from "../components/ExampleComponent.vue";
 import TheNavbar from "../components/TheNavbar.vue";
+import axios from "axios";
+
 export default {
-    // components: { ExampleComponentVue },
-    components: { TheNavbar},
+    components: {TheNavbar},
+    data() {
+        return {
+            posts: []
+        }
+    },
+    mounted() {
+        this.fetchPosts();
+    },
+    methods: {
+        fetchPosts() {
+            axios.get("/api/posts").then((response) => {
+			    this.posts = response.data;
+		    });
+        },
+    },
 };
 </script>
 
