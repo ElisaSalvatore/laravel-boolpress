@@ -1966,6 +1966,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2535,18 +2548,46 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_c("TheNavbar"), _vm._v(" "), _vm._m(0)], 1)
+  return _c(
+    "div",
+    [
+      _c("TheNavbar"),
+      _vm._v(" "),
+      _c("div", { staticClass: "container py-4" }, [
+        _c("h1", [_vm._v("Vue Blog")]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "row row-cols-1 row-cols-md-2 g-4" },
+          _vm._l(_vm.posts, function (post) {
+            return _c("div", { key: post.id, staticClass: "col" }, [
+              _c("div", { staticClass: "card my-3" }, [
+                _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: "", alt: "post images" },
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h5", { staticClass: "card-title" }, [
+                    _vm._v(_vm._s(post.title)),
+                  ]),
+                  _vm._v(" "),
+                  _c("p", {
+                    staticClass: "card-text",
+                    domProps: { innerHTML: _vm._s(post.content) },
+                  }),
+                ]),
+              ]),
+            ])
+          }),
+          0
+        ),
+      ]),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container py-4" }, [
-      _c("h1", { staticClass: "p-4" }, [_vm._v("Benvenuto in Vue.js")]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

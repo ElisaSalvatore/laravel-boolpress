@@ -3,9 +3,22 @@
       <TheNavbar></TheNavbar>
 
         <div class="container py-4">
-            <h1 class="p-4">Benvenuto in Vue.js</h1>
+            <h1>Vue Blog</h1>
+
+            <!-- CARD -->
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col" v-for="post of posts" :key="post.id">
+                    <div class="card my-3">
+                        <img src="" class="card-img-top" alt="post images">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text" v-html="post.content"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-      
     </div>
 </template>
 
