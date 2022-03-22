@@ -5,12 +5,19 @@
         <div class="container py-4">
             <h1>Benvenut* nel Vue Blog!</h1>
 
-            <!-- BOTTONE REFRESH -->
+            <!-- BOTTONE RICARIDA DATI -->
             <div class="d-flex justify-content-end">
                 <button class="btn btn-primary" @click="fetchPosts">
-                    Refresh
+                   <i class="fa-solid fa-rotate-right"></i> Ricarica Dati
                 </button>
             </div> 
+
+            <!-- BARRA CARICAMENTO -->
+            <div class="progress my-3" v-if="loading">
+                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                    Caricamento...
+                </div>
+            </div>
 
             <!-- CARD -->
             <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -48,13 +55,15 @@ export default {
         return {
             posts: [],
             pagination: {},
+            // è true di deafult perchè all'apertura della pagina carico i dati 
+            loading: true,
         };
     },
     mounted() {
         this.fetchPosts();
     },
     methods: {
-        fetchPosts(page = 1) {
+        async fetchPosts(page = 1) {
             if(page < 1) {
 				page = 1;
 			}
@@ -63,15 +72,35 @@ export default {
 				page = this.pagination.last_page;
 			}
 
-            axios.get("/api/posts?page=" + page).then((response) => {
-                this.pagination = response.data;
-        	    this.posts = response.data.data;
-            });
+            // axios.get("/api/posts?page=" + page).then((response) => {
+            //     this.pagination = response.data;
+        	//     this.posts = response.data.data;
+            // });
+
+
+            // Prima della chiamata axios setto a true
+            this.loading = true;
+            // So già il promise aspetterà che il browser esegua questa riga di codice *
+            const response = await axios.get("/api/posts?page=" + page);
+            this.pagination= response.data;
+            this.posts = response.data.data;
+
+            // * Dopo la chiamata axios metto un setTimeout perchè la chiamata è talmente veloce 
+            // che non si vedrebbe nemmeno il caricamento
+            setTimeout(() => {
+                this.loading = false;
+            }, 1000);
         },
     },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+.pagination {
+    .page-item {
+        cursor: pointer;
+    }
+}
 
 </style>
