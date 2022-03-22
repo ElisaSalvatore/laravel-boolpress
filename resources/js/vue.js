@@ -13,6 +13,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 import App from "./views/App"
+import router from "./router.js"
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -23,4 +24,5 @@ import App from "./views/App"
 const app = new Vue({
     el: '#appVue',
     render:(h) => h(App),
+    router: router,
 });

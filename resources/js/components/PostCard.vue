@@ -15,8 +15,8 @@
 
                 <br>
 
-                  <!-- Categoria -->
-                <div v-if="post.category" class="d-inline mr-2">
+                <!-- Categoria -->
+                <div v-if="post.category" class="d-inline mb-2 mr-2">
                     <span class="bg-success rounded p-1 text-white">
                         {{ post.category.code }}
                     </span>
@@ -27,7 +27,7 @@
                     <span
                         v-for="tag in post.tags"
                         :key="tag.id"
-                        class="badge bg-warning p-1 mr-2"
+                        class="bg-warning rounded p-1 mr-2"
                         > 
                         {{ tag.name }}
                     </span>
