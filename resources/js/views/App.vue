@@ -3,104 +3,20 @@
       <TheNavbar></TheNavbar>
 
         <div class="container py-4">
-            <h1>Benvenut* nel Vue Blog!</h1>
 
-            <!-- BOTTONE RICARIDA DATI -->
-            <div class="d-flex justify-content-end">
-                <button class="btn btn-primary" @click="fetchPosts">
-                   <i class="fa-solid fa-rotate-right"></i> Ricarica Dati
-                </button>
-            </div> 
+            <router-view></router-view>
 
-            <!-- BARRA CARICAMENTO -->
-            <div class="progress my-3" v-if="loading">
-                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                    Caricamento...
-                </div>
-            </div>
-
-            <!-- CARD -->
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                <PostCard v-for="post of posts" :key="post.id" :post="post">
-                    <!-- contenuto di ogni singola card presente nel componente -->
-                </PostCard>
-            </div>
-
-            <!-- PAGINATION -->
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        <a @click="fetchPosts(pagination.current_page - 1)" class="page-link">Previous</a>
-                    </li>
-                    <li class="page-item" v-for="page in pagination.last_page" :key="page">
-                        <a @click="fetchPosts(page)" class="page-link">{{ page }}</a>
-                    </li>
-                    <li class="page-item">
-                        <a @click="fetchPosts(pagination.current_page + 1)" class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
         </div>
     </div>
 </template>
 
 <script>
 import TheNavbar from "../components/TheNavbar.vue";
-import axios from "axios";
-import PostCard from "../components/PostCard.vue";
 
 export default {
-    components: {TheNavbar, PostCard},
-    data() {
-        return {
-            posts: [],
-            pagination: {},
-            // è true di deafult perchè all'apertura della pagina carico i dati 
-            loading: true,
-        };
-    },
-    mounted() {
-        this.fetchPosts();
-    },
-    methods: {
-        async fetchPosts(page = 1) {
-            if(page < 1) {
-				page = 1;
-			}
-
-			if(page > this.pagination.last_page) {
-				page = this.pagination.last_page;
-			}
-
-            // axios.get("/api/posts?page=" + page).then((response) => {
-            //     this.pagination = response.data;
-        	//     this.posts = response.data.data;
-            // });
-
-
-            // Prima della chiamata axios setto a true
-            this.loading = true;
-            // So già il promise aspetterà che il browser esegua questa riga di codice *
-            const response = await axios.get("/api/posts?page=" + page);
-            this.pagination= response.data;
-            this.posts = response.data.data;
-
-            // * Dopo la chiamata axios metto un setTimeout perchè la chiamata è talmente veloce 
-            // che non si vedrebbe nemmeno il caricamento
-            setTimeout(() => {
-                this.loading = false;
-            }, 1000);
-        },
-    },
+    components: {TheNavbar},
+    
 };
 </script>
 
-<style lang="scss" scoped>
-
-.pagination {
-    .page-item {
-        cursor: pointer;
-    }
-}
-
-</style>
+<style lang="scss" scoped></style>
