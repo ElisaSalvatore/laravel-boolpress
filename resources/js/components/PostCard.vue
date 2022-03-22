@@ -8,18 +8,28 @@
                 <p class="card-text" v-html="post.content"></p>
             
                 <!-- Autore e data -->
-                <em>
-                    Autore: {{ post.user.name }}
-                    <br>
-                    Data: {{ post.created_at }}
-                </em>
+                <div>
+                    Autore: <em class="mr-2">{{ post.user.name }} </em>
+                    Data: <em>{{ formatDate(post.created_at) }}</em>
+                </div>
 
                 <br>
 
                   <!-- Categoria -->
-                <div v-if="post.category" class="py-2">
-                    <span class="bg-success rounded-pill p-1 text-white">
+                <div v-if="post.category" class="d-inline mr-2">
+                    <span class="bg-success rounded p-1 text-white">
                         {{ post.category.code }}
+                    </span>
+                </div>
+
+                <!-- Tags -->
+                <div v-if="post.tags" class="d-inline">
+                    <span
+                        v-for="tag in post.tags"
+                        :key="tag.id"
+                        class="badge bg-warning p-1 mr-2"
+                        > 
+                        {{ tag.name }}
                     </span>
                 </div>
 
@@ -34,6 +44,8 @@
 </template>
 
 <script>
+import dayjs from "dayjs";
+
 export default {
     props: {
         post: Object,
@@ -44,20 +56,28 @@ export default {
                 post.coverImg ?? 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png'
             );
         },
+        formatDate(date) {
+		    return dayjs(date).format('DD/MM/YYYY (HH:mm)');
+	    },
     },
 }
 </script>
 
 <style lang="scss" scoped>
     .card {
-        max-height:490px;
+        max-height: 550px;
 
         > img {
             height:280px;
         }
 
-        .card-text {
-            height: 30px;
+        .card-body{
+
+            .card-text {
+                height: 30px;
+            }
+
         }
+
     }
 </style>
