@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
 	mode: "history",
     routes: [
-		{ path: "/", 
+		{ path: "//", 
 			component: Home, 
 			name: "home.index",
 			meta: { title: "Homepage", linkText: "Home"}
@@ -20,5 +20,10 @@ const router = new VueRouter({
 		},
 	],
 });
+
+router.beforeEach((to, from, next) => {
+	document.title = to.meta.title;
+	next();
+})
 
 export default router; 
