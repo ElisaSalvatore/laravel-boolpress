@@ -62,9 +62,6 @@ export default {
             loading: true,
         };
     },
-    mounted() {
-        this.fetchPosts();
-    },
     methods: {
         async fetchPosts(page = 1) {
             if(page < 1) {
@@ -94,6 +91,9 @@ export default {
                 this.loading = false;
             }, 1000);
         },
+    },
+    mounted() {
+        this.fetchPosts();
     },
 }
 </script>

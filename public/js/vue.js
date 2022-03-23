@@ -2026,7 +2026,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      routes: []
+    };
+  },
+  mounted: function mounted() {
+    this.routes = this.$router.getRoutes();
+  }
+});
 
 /***/ }),
 
@@ -2132,9 +2152,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       loading: true
     };
   },
-  mounted: function mounted() {
-    this.fetchPosts();
-  },
   methods: {
     fetchPosts: function fetchPosts() {
       var _arguments = arguments,
@@ -2184,6 +2201,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     }
+  },
+  mounted: function mounted() {
+    this.fetchPosts();
   }
 });
 
@@ -2232,7 +2252,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  max-height: 280px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n}", ""]);
+exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  max-height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n}", ""]);
 
 // exports
 
@@ -4279,14 +4299,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
+  return _c("div", [
+    _c(
       "nav",
       { staticClass: "navbar navbar-expand-md navbar-dark bg-dark shadow-sm" },
       [
@@ -4295,26 +4309,85 @@ var staticRenderFns = [
             _vm._v("Laravel Boolpress"),
           ]),
           _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "navbar", attrs: { id: "navbarSupportedContent" } },
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarSupportedContent" },
+            },
             [
               _c("ul", { staticClass: "navbar-nav ms-auto" }),
               _vm._v(" "),
-              _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-                _c("li", { staticClass: "nav-item" }, [
-                  _c(
-                    "a",
-                    { staticClass: "nav-link", attrs: { href: "/login" } },
-                    [_vm._v(" Admin ")]
-                  ),
-                ]),
-              ]),
+              _c(
+                "ul",
+                { staticClass: "navbar-nav ml-auto" },
+                [
+                  _vm._l(_vm.routes, function (route) {
+                    return _c(
+                      "li",
+                      { key: route.path, staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: route.path },
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(route.meta.linkText) +
+                                " \n            "
+                            ),
+                          ]
+                        ),
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                ],
+                2
+              ),
             ]
           ),
         ]),
       ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarSupportedContent",
+          "aria-controls": "navbarSupportedContent",
+          "aria-expanded": "false",
+        },
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/login" } }, [
+        _vm._v(" Area privata "),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
@@ -20219,11 +20292,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: "/",
     component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    name: "home.index"
+    name: "home.index",
+    meta: {
+      title: "Homepage",
+      linkText: "Home"
+    }
   }, {
     path: "/contacts",
     component: _pages_Contacts_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    name: "contacts.index"
+    name: "contacts.index",
+    meta: {
+      title: "Contatti",
+      linkText: "Scrivici!"
+    }
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);

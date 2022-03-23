@@ -8,9 +8,17 @@ Vue.use(VueRouter);
 const router = new VueRouter({
 	mode: "history",
     routes: [
-		{path: "/", component: Home, name: "home.index"}, 
-		{path: "/contacts", component: Contacts, name: "contacts.index"}
-	]
+		{ path: "/", 
+			component: Home, 
+			name: "home.index",
+			meta: { title: "Homepage", linkText: "Home"}
+		}, 
+		{ path: "/contacts", 
+			component: Contacts, 
+			name: "contacts.index",
+			meta: { title: "Contatti", linkText: "Scrivici!"}
+		},
+	],
 });
 
 export default router; 
