@@ -1,7 +1,7 @@
 <template>
     <div class="col">
         <div class="card my-3">
-            <img :src="getPostCover(post)" class="card-img-top contain" alt="post images">
+            <img :src="getPostCover(post)" class="card-img-top" alt="post images">
             
             <div class="card-body">
                 <h5 class="card-title">{{ post.title }}</h5>
@@ -67,8 +67,9 @@ export default {
     .card {
         max-height: 550px;
 
-        > img {
-            height:280px;
+        .card-img-top {
+            max-height: 280px;
+            object-fit: cover;
         }
 
         .card-body{
@@ -76,8 +77,6 @@ export default {
             .card-text {
                 height: 30px;
             }
-
         }
-
     }
 </style>

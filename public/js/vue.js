@@ -2111,6 +2111,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2225,7 +2232,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card > img[data-v-1324358a] {\n  height: 280px;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n}", ""]);
+exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  max-height: 280px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n}", ""]);
 
 // exports
 
@@ -4169,7 +4176,7 @@ var render = function () {
   return _c("div", { staticClass: "col" }, [
     _c("div", { staticClass: "card my-3" }, [
       _c("img", {
-        staticClass: "card-img-top contain",
+        staticClass: "card-img-top",
         attrs: { src: _vm.getPostCover(_vm.post), alt: "post images" },
       }),
       _vm._v(" "),
@@ -4404,62 +4411,94 @@ var render = function () {
       1
     ),
     _vm._v(" "),
-    _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-      _c(
-        "ul",
-        { staticClass: "pagination" },
-        [
-          _c("li", { staticClass: "page-item" }, [
+    _c(
+      "nav",
+      {
+        staticClass: "d-flex justify-content-center my-5",
+        attrs: { "aria-label": "Page navigation example" },
+      },
+      [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
             _c(
-              "a",
+              "li",
               {
-                staticClass: "page-link",
-                on: {
-                  click: function ($event) {
-                    return _vm.fetchPosts(_vm.pagination.current_page - 1)
-                  },
-                },
+                staticClass: "page-item",
+                class: { disabled: _vm.pagination.current_page === 1 },
               },
-              [_vm._v("Previous")]
-            ),
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.pagination.last_page, function (page) {
-            return _c("li", { key: page, staticClass: "page-item" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "page-link",
-                  on: {
-                    click: function ($event) {
-                      return _vm.fetchPosts(page)
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    on: {
+                      click: function ($event) {
+                        return _vm.fetchPosts(_vm.pagination.current_page - 1)
+                      },
                     },
                   },
+                  [_vm._v("Previous")]
+                ),
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.pagination.last_page, function (page) {
+              return _c(
+                "li",
+                {
+                  key: page,
+                  staticClass: "page-item",
+                  class: { active: _vm.pagination.current_page === page },
                 },
-                [_vm._v(_vm._s(page))]
-              ),
-            ])
-          }),
-          _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      on: {
+                        click: function ($event) {
+                          return _vm.fetchPosts(page)
+                        },
+                      },
+                    },
+                    [_vm._v(_vm._s(page))]
+                  ),
+                ]
+              )
+            }),
+            _vm._v(" "),
             _c(
-              "a",
+              "li",
               {
-                staticClass: "page-link",
-                attrs: { href: "#" },
-                on: {
-                  click: function ($event) {
-                    return _vm.fetchPosts(_vm.pagination.current_page + 1)
-                  },
+                staticClass: "page-item",
+                class: {
+                  disabled:
+                    _vm.pagination.current_page === _vm.pagination.last_page,
                 },
               },
-              [_vm._v("Next")]
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.fetchPosts(_vm.pagination.current_page + 1)
+                      },
+                    },
+                  },
+                  [_vm._v("Next")]
+                ),
+              ]
             ),
-          ]),
-        ],
-        2
-      ),
-    ]),
+          ],
+          2
+        ),
+      ]
+    ),
   ])
 }
 var staticRenderFns = []

@@ -9,7 +9,6 @@
             </button>
         </div> 
 
-        <!-- BARRA CARICAMENTO -->
         <div class="progress my-3" v-if="loading">
             <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                 Caricamento...
@@ -24,15 +23,23 @@
         </div>
 
         <!-- PAGINATION -->
-        <nav aria-label="Page navigation example">
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center my-5">
             <ul class="pagination">
-                <li class="page-item">
-                    <a @click="fetchPosts(pagination.current_page - 1)" class="page-link">Previous</a>
+                <li class="page-item" 
+                    :class="{ disabled: pagination.current_page === 1 }"
+                    >
+                        <a @click="fetchPosts(pagination.current_page - 1)" class="page-link">Previous</a>
                 </li>
-                <li class="page-item" v-for="page in pagination.last_page" :key="page">
-                    <a @click="fetchPosts(page)" class="page-link">{{ page }}</a>
+                <li class="page-item" 
+                    :class="{ active: pagination.current_page === page }"
+                    v-for="page in pagination.last_page" 
+                    :key="page"
+                    >
+                        <a @click="fetchPosts(page)" class="page-link">{{ page }}</a>
                 </li>
-                <li class="page-item">
+                <li class="page-item"
+                    :class="{ disabled: pagination.current_page === pagination.last_page }"
+                    >
                     <a @click="fetchPosts(pagination.current_page + 1)" class="page-link" href="#">Next</a>
                 </li>
             </ul>
