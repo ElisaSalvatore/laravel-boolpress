@@ -24,7 +24,7 @@
         {{-- La navbar di admin è nella cartella partials/navbar.blade.php --}}
         @include('partials.navbar')
 
-        <main class="py-4">
+        <main class="py-4 bg-dark vh-100">
             @yield('content')
         </main>
     </div>

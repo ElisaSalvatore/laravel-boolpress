@@ -41,17 +41,18 @@
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				routes: [],
-			}
-		},
-		mounted() {
-			this.routes = this.$router.getRoutes();
-		},
-	};
+
+export default {
+  data() {
+    return {
+      routes: [],
+    }
+  },
+  mounted() {
+    // per filtrare le rotte che contengono un linkText 
+    this.routes = this.$router.getRoutes().filter((route) => route.meta.linkText !== undefined);
+  },
+};
 </script>
 
-
-<style></style>
+<style lang="scss" scoped></style>

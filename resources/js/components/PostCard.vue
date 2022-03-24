@@ -37,7 +37,7 @@
 
             <!-- LINK DETTAGLI -->
             <div class="card-footer d-flex justify-content-end align-items-center">
-                <a href="#" title="Mostra dettagli del post">Dettagli</a>
+                <router-link :to=" { name: 'posts.show', params: { post: post.slug } }" title="Mostra dettagli del post">Dettagli > </router-link>
             </div>
         </div>
     </div>
