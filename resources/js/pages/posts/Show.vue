@@ -20,20 +20,18 @@
             <em v-if="post.user">{{ post.user.name }}</em>
         </div>
 
-        <div class="d-flex flex-column">
-            <div></div>
-            <img :src="post.coverImg" class="post-img img-fluid my-3 align-self-center" style="width: 600px" alt="">
+    
+        <img :src="post.coverImg" class="post-img img-fluid mt-3" alt="">
 
-            <h3 class="mt-4">Contenuto del post</h3> 
-            <div v-html="post.content" class="lead"></div>
+        <h3 class="mt-4">Contenuto del post</h3> 
+        <div v-html="post.content" class="lead"></div>
 
-            <h5 class="mt-4">Data creazione</h5>
-            <div>{{ createdAt }}</div>
-            
-            <h5 class="mt-4">Data ultima modifica</h5>
-            <div>{{ updatedAt }}</div>
-        </div>
-
+        <h5 class="mt-4">Data creazione</h5>
+        <div>{{ createdAt }}</div>
+        
+        <h5 class="mt-4">Data ultima modifica</h5>
+        <div>{{ updatedAt }}</div>
+    
     </div>
 </template>
 
@@ -72,4 +70,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.post-img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+}
+</style>

@@ -46,11 +46,20 @@ export default {
   data() {
     return {
       routes: [],
+      user: null,
     }
+  },
+  methods: {
+    fetchUser() {
+      axios.get("/api/user").then((response) =>{
+        this.user = response.data;
+      })
+    },
   },
   mounted() {
     // per filtrare le rotte che contengono un linkText 
     this.routes = this.$router.getRoutes().filter((route) => route.meta.linkText !== undefined);
+    this.fetchUser();
   },
 };
 </script>

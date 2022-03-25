@@ -20,11 +20,6 @@ const router = new VueRouter({
 			name: "contacts.index",
 			meta: { title: "Contatti", linkText: "Scrivici!"}
 		},
-		// { path: "/posts/create", 
-		// 	component: PostCreate, 
-		// 	name: "posts.store",
-		// 	meta: { title: "Crea un nuovo post", linkText: "Crea post"}
-		// },
 		{ path: "/posts/:post", 
 			component: PostShow, 
 			name: "posts.show",
