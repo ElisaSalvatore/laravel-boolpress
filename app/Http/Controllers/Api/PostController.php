@@ -47,6 +47,10 @@ class PostController extends Controller {
         ->with([ "tags", "user", "category"])
         ->first();
 
+        if (!$post) {
+            abort(404);
+        }
+
         return response()->json($post);
     }
 }
