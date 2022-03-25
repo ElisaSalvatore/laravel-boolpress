@@ -2260,6 +2260,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4723,11 +4744,54 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "infos d-flex flex-column justify-content-between" },
-    [
-      _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+  return _c("div", [
+    _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "mt-3 d-flex justify-content-between align-items-center" },
+      [
+        _c(
+          "div",
+          { staticClass: "post-infos" },
+          [
+            _vm.post.category
+              ? _c(
+                  "span",
+                  { staticClass: "bg-success rounded p-1 mr-2 text-white" },
+                  [
+                    _vm._v(
+                      " \n                " +
+                        _vm._s(_vm.post.category.code) +
+                        "\n            "
+                    ),
+                  ]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.post.tags, function (tag) {
+              return _c(
+                "span",
+                { key: tag.id, staticClass: "bg-warning rounded mr-2" },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(tag.name) + "\n            "
+                  ),
+                ]
+              )
+            }),
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm.post.user
+          ? _c("em", [_vm._v(_vm._s(_vm.post.user.name))])
+          : _vm._e(),
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "d-flex flex-column" }, [
+      _c("div"),
       _vm._v(" "),
       _c("img", {
         staticClass: "post-img img-fluid my-3 align-self-center",
@@ -4738,8 +4802,8 @@ var render = function () {
       _c("h3", [_vm._v("Contenuto del post")]),
       _vm._v(" "),
       _c("div", { domProps: { innerHTML: _vm._s(_vm.post.content) } }),
-    ]
-  )
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20614,7 +20678,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       title: "Contatti",
       linkText: "Scrivici!"
     }
-  }, {
+  }, // { path: "/posts/create", 
+  // 	component: PostCreate, 
+  // 	name: "posts.store",
+  // 	meta: { title: "Crea un nuovo post", linkText: "Crea post"}
+  // },
+  {
     path: "/posts/:post",
     component: _pages_posts_Show_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     name: "posts.show",
