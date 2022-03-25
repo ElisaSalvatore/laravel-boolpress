@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>{{ post.title }}</h1>
+        <h1 class="my-2">{{ post.title }}</h1>
 
         <div class="mt-3 d-flex justify-content-between align-items-center">
             <div class="post-infos">
@@ -21,24 +21,39 @@
         </div>
 
         <div class="d-flex flex-column">
-                <div></div>
-                <img :src="post.coverImg" class="post-img img-fluid my-3 align-self-center" style="width: 600px" alt="">
+            <div></div>
+            <img :src="post.coverImg" class="post-img img-fluid my-3 align-self-center" style="width: 600px" alt="">
 
-                <h3>Contenuto del post</h3> 
-                <div v-html="post.content"></div>
+            <h3 class="mt-4">Contenuto del post</h3> 
+            <div v-html="post.content" class="lead"></div>
+
+            <h5 class="mt-4">Data creazione</h5>
+            <div>{{ createdAt }}</div>
+            
+            <h5 class="mt-4">Data ultima modifica</h5>
+            <div>{{ updatedAt }}</div>
         </div>
-    
+
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import dayjs from 'dayjs';
 
 export default {
     data() {
         return {
             post: {},
         }
+    },
+    computed: {
+        createdAt() {
+            return dayjs(this.post.created_at).format("DD/MM/YY HH:mm");
+        },
+        updatedAt() {
+            return dayjs(this.post.updated_at).format("DD/MM/YY HH:mm");
+        },
     },
     methods: {
         async fetchPost() {

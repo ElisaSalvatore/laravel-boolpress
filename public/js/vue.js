@@ -2242,6 +2242,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! dayjs */ "./node_modules/dayjs/dayjs.min.js");
+/* harmony import */ var dayjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(dayjs__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2281,12 +2283,27 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       post: {}
     };
+  },
+  computed: {
+    createdAt: function createdAt() {
+      return dayjs__WEBPACK_IMPORTED_MODULE_2___default()(this.post.created_at).format("DD/MM/YY HH:mm");
+    },
+    updatedAt: function updatedAt() {
+      return dayjs__WEBPACK_IMPORTED_MODULE_2___default()(this.post.updated_at).format("DD/MM/YY HH:mm");
+    }
   },
   methods: {
     fetchPost: function fetchPost() {
@@ -4745,7 +4762,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v(_vm._s(_vm.post.title))]),
+    _c("h1", { staticClass: "my-2" }, [_vm._v(_vm._s(_vm.post.title))]),
     _vm._v(" "),
     _c(
       "div",
@@ -4799,9 +4816,20 @@ var render = function () {
         attrs: { src: _vm.post.coverImg, alt: "" },
       }),
       _vm._v(" "),
-      _c("h3", [_vm._v("Contenuto del post")]),
+      _c("h3", { staticClass: "mt-4" }, [_vm._v("Contenuto del post")]),
       _vm._v(" "),
-      _c("div", { domProps: { innerHTML: _vm._s(_vm.post.content) } }),
+      _c("div", {
+        staticClass: "lead",
+        domProps: { innerHTML: _vm._s(_vm.post.content) },
+      }),
+      _vm._v(" "),
+      _c("h5", { staticClass: "mt-4" }, [_vm._v("Data creazione")]),
+      _vm._v(" "),
+      _c("div", [_vm._v(_vm._s(_vm.createdAt))]),
+      _vm._v(" "),
+      _c("h5", { staticClass: "mt-4" }, [_vm._v("Data ultima modifica")]),
+      _vm._v(" "),
+      _c("div", [_vm._v(_vm._s(_vm.updatedAt))]),
     ]),
   ])
 }
