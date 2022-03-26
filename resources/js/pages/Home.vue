@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1>Benvenut* nel Vue Blog!</h1>
+        <h1 v-if="user">Ciao {{user.name}}, benvenut* nel Vue Blog!</h1>
+        <h1 v-else>Ciao, benvenut* nel Vue Blog!</h1>
+        <h2>Post più recenti</h2>
 
         <!-- BOTTONE RICARIDA DATI -->
         <div class="d-flex justify-content-end">
@@ -60,6 +62,7 @@ export default {
             pagination: {},
             // è true di deafult perchè all'apertura della pagina carico i dati 
             loading: true,
+            user: null,
         };
     },
     methods: {
@@ -91,9 +94,23 @@ export default {
                 this.loading = false;
             }, 1000);
         },
+        getStoredUser() {
+            const storedUser = localStorage.getItem("user");
+            if (storedUser) {
+                this.user = JSON.parse(storedUser);
+            } else {
+                this.user = null;
+            }
+            // console.log(this.user);
+        },
     },
     mounted() {
         this.fetchPosts();
+        this.getStoredUser();
+
+        window.addEventListener("storedUserChanged", () => {
+            this.getStoredUser(); // questa funzione la invochiamo ogni volta che stored user cambi
+        });
     },
 }
 </script>

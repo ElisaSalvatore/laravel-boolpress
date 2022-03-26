@@ -57,8 +57,10 @@ export default {
     fetchUser() {
       axios.get("/api/user").then((response) =>{
         this.user = response.data;
+        localStorage.setItem("user", JSON.stringify(response.data));
       }).catch((er) => {
         console.error("Utente non loggato");
+        localStorage.removeItem("user");
       })
     },
   },
