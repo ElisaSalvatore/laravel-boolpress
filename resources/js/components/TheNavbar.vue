@@ -31,7 +31,10 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login"> Area privata </a>
+              <!-- utente NON loggato -->
+              <a class="nav-link" href="/login" v-if="!user"> Login </a>
+              <!-- utente loggato -->
+              <a class="nav-link" href="/login" v-else> {{ user.name }} </a>
             </li>
           </ul>
         </div> 
@@ -41,6 +44,7 @@
 </template>
 
 <script>
+import axios from "axios";
 
 export default {
   data() {
@@ -53,6 +57,8 @@ export default {
     fetchUser() {
       axios.get("/api/user").then((response) =>{
         this.user = response.data;
+      }).catch((er) => {
+        console.error("Utente non loggato");
       })
     },
   },
