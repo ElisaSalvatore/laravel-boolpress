@@ -2108,9 +2108,11 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/user").then(function (response) {
         _this.user = response.data;
         localStorage.setItem("user", JSON.stringify(response.data));
+        window.dispatchEvent(new CustomEvent("storedUserChange"));
       })["catch"](function (er) {
         console.error("Utente non loggato");
         localStorage.removeItem("user");
+        window.dispatchEvent(new CustomEvent("storedUserChange"));
       });
     }
   },

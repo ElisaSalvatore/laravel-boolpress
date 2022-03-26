@@ -107,7 +107,7 @@ export default {
     mounted() {
         this.fetchPosts();
         this.getStoredUser();
-
+        
         window.addEventListener("storedUserChanged", () => {
             this.getStoredUser(); // questa funzione la invochiamo ogni volta che stored user cambi
         });
