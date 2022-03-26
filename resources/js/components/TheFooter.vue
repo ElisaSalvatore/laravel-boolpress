@@ -1,5 +1,5 @@
 <template>
-  <footer class="border-top bg-dark py-5">
+  <footer class="bg-light py-5">
     <div class="container">
       
       <!-- <h4 v-if="user">{{ user.name }} buona giornata!</h4> -->

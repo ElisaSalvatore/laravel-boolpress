@@ -2,7 +2,7 @@
     <div>
       <TheNavbar></TheNavbar>
 
-        <div class="container py-4">
+        <div class="container py-4 vh-100">
 
             <router-view></router-view>
 

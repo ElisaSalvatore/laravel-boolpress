@@ -2136,13 +2136,94 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      formData: {
+        name: "",
+        email: "",
+        message: ""
+      }
+    };
+  },
+  methods: {
+    formSubmit: function formSubmit() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                response = axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
+                response.data;
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    }
+  }
+});
 
 /***/ }),
 
@@ -4593,7 +4674,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("footer", { staticClass: "border-top bg-dark py-5" }, [
+    return _c("footer", { staticClass: "bg-light py-5" }, [
       _c("div", { staticClass: "container" }),
     ])
   },
@@ -4739,16 +4820,132 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h1", [_vm._v("Contatti")]),
+    _vm._v(" "),
+    _c("div", [
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          {
+            staticClass: "form-label",
+            attrs: { for: "exampleFormControlInput1" },
+          },
+          [_vm._v("Nome e Cognome:")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.name,
+              expression: "formData.name",
+            },
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            id: "exampleFormControlInput1",
+            placeholder: "Elisa Salva",
+          },
+          domProps: { value: _vm.formData.name },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "name", $event.target.value)
+            },
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          {
+            staticClass: "form-label",
+            attrs: { for: "exampleFormControlInput1" },
+          },
+          [_vm._v("Indirizzo Email:")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.email,
+              expression: "formData.email",
+            },
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "email",
+            id: "exampleFormControlInput1",
+            placeholder: "name@example.com",
+          },
+          domProps: { value: _vm.formData.email },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "email", $event.target.value)
+            },
+          },
+        }),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-3" }, [
+        _c(
+          "label",
+          {
+            staticClass: "form-label",
+            attrs: { for: "exampleFormControlTextarea1" },
+          },
+          [_vm._v("Messaggio:")]
+        ),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.formData.message,
+              expression: "formData.message",
+            },
+          ],
+          staticClass: "form-control",
+          attrs: { id: "exampleFormControlTextarea1", rows: "3" },
+          domProps: { value: _vm.formData.message },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.formData, "message", $event.target.value)
+            },
+          },
+        }),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "submit" },
+          on: { click: _vm.formSubmit },
+        },
+        [_vm._v("Invia!")]
+      ),
+    ]),
+  ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h1", [_vm._v("Contatti")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -5048,7 +5245,12 @@ var render = function () {
     [
       _c("TheNavbar"),
       _vm._v(" "),
-      _c("div", { staticClass: "container py-4" }, [_c("router-view")], 1),
+      _c(
+        "div",
+        { staticClass: "container py-4 vh-100" },
+        [_c("router-view")],
+        1
+      ),
       _vm._v(" "),
       _c("TheFooter"),
     ],
