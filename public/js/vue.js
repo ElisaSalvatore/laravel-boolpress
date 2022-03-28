@@ -2190,15 +2190,36 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      formSubmitted: false,
       formData: {
         name: "",
         email: "",
         message: ""
-      }
+      },
+      formValidationErrors: null
     };
   },
   methods: {
@@ -2206,24 +2227,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var resp;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                _context.prev = 0;
+                _this.formValidationErrors = null;
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
 
-              case 2:
-                response = _context.sent;
-                response.data;
-
               case 4:
+                resp = _context.sent;
+                //resp.data;
+                _this.formSubmitted = true;
+                _context.next = 12;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+
+                if (_context.t0.response.status === 422) {
+                  _this.formValidationErrors = _context.t0.response.data.errors;
+                }
+
+                alert("A causa di un errore non è stato possibile inviare la sua richiesta.\n" + _context.t0.response.data.message);
+
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 8]]);
       }))();
     }
   }
@@ -4827,126 +4863,168 @@ var render = function () {
   return _c("div", [
     _c("h1", [_vm._v("Contatti")]),
     _vm._v(" "),
-    _c("div", [
-      _c("div", { staticClass: "mb-3" }, [
-        _c(
-          "label",
-          {
-            staticClass: "form-label",
-            attrs: { for: "exampleFormControlInput1" },
-          },
-          [_vm._v("Nome e Cognome:")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.name,
-              expression: "formData.name",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "email",
-            id: "exampleFormControlInput1",
-            placeholder: "Elisa Salva",
-          },
-          domProps: { value: _vm.formData.name },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.formData, "name", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "mb-3" }, [
-        _c(
-          "label",
-          {
-            staticClass: "form-label",
-            attrs: { for: "exampleFormControlInput1" },
-          },
-          [_vm._v("Indirizzo Email:")]
-        ),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.email,
-              expression: "formData.email",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "email",
-            id: "exampleFormControlInput1",
-            placeholder: "name@example.com",
-          },
-          domProps: { value: _vm.formData.email },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.formData, "email", $event.target.value)
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "mb-3" }, [
-        _c(
-          "label",
-          {
-            staticClass: "form-label",
-            attrs: { for: "exampleFormControlTextarea1" },
-          },
-          [_vm._v("Messaggio:")]
-        ),
-        _vm._v(" "),
-        _c("textarea", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.formData.message,
-              expression: "formData.message",
-            },
-          ],
-          staticClass: "form-control",
-          attrs: { id: "exampleFormControlTextarea1", rows: "3" },
-          domProps: { value: _vm.formData.message },
-          on: {
-            input: function ($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.formData, "message", $event.target.value)
-            },
-          },
-        }),
-      ]),
-    ]),
-    _vm._v(" "),
-    _c("div", [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: { type: "submit" },
-          on: { click: _vm.formSubmit },
-        },
-        [_vm._v("Invia!")]
-      ),
-    ]),
+    !_vm.formSubmitted
+      ? _c("div", [
+          _c("div", [
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "form-label",
+                  attrs: { for: "exampleFormControlInput1" },
+                },
+                [_vm._v("Nome e Cognome:")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.name,
+                    expression: "formData.name",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  id: "exampleFormControlInput1",
+                  placeholder: "Elisa Salva",
+                },
+                domProps: { value: _vm.formData.name },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "name", $event.target.value)
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _vm.formValidationErrors && _vm.formValidationErrors.name
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      " \n            " +
+                        _vm._s(_vm.formValidationErrors.name) +
+                        " \n        "
+                    ),
+                  ])
+                : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "form-label",
+                  attrs: { for: "exampleFormControlInput1" },
+                },
+                [_vm._v("Indirizzo Email:")]
+              ),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.email,
+                    expression: "formData.email",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  id: "exampleFormControlInput1",
+                  placeholder: "name@example.com",
+                },
+                domProps: { value: _vm.formData.email },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "email", $event.target.value)
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _vm.formValidationErrors && _vm.formValidationErrors.email
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      " \n            " +
+                        _vm._s(_vm.formValidationErrors.email) +
+                        " \n        "
+                    ),
+                  ])
+                : _vm._e(),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-3" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "form-label",
+                  attrs: { for: "exampleFormControlTextarea1" },
+                },
+                [_vm._v("Messaggio:")]
+              ),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.formData.message,
+                    expression: "formData.message",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { id: "exampleFormControlTextarea1", rows: "3" },
+                domProps: { value: _vm.formData.message },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.formData, "message", $event.target.value)
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _vm.formValidationErrors && _vm.formValidationErrors.message
+                ? _c("span", { staticClass: "text-danger" }, [
+                    _vm._v(
+                      " \n            " +
+                        _vm._s(_vm.formValidationErrors.message) +
+                        " \n        "
+                    ),
+                  ])
+                : _vm._e(),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary",
+                attrs: { type: "submit" },
+                on: { click: _vm.formSubmit },
+              },
+              [_vm._v("Invia!")]
+            ),
+          ]),
+        ])
+      : _c("div", { staticClass: "alert alert-success py-4" }, [
+          _c("h4", [_vm._v("Grazie per averci contattato.")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "lead" }, [
+            _vm._v(
+              "La sua richiesta è stata inviata, a breve le invieremo una email di conferma."
+            ),
+          ]),
+        ]),
   ])
 }
 var staticRenderFns = []
@@ -20840,14 +20918,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./resources/js/pages/Contacts.vue ***!
   \*****************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contacts_vue_vue_type_template_id_2d69ed48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Contacts.vue?vue&type=template&id=2d69ed48& */ "./resources/js/pages/Contacts.vue?vue&type=template&id=2d69ed48&");
 /* harmony import */ var _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Contacts.vue?vue&type=script&lang=js& */ "./resources/js/pages/Contacts.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -20877,7 +20956,7 @@ component.options.__file = "resources/js/pages/Contacts.vue"
 /*!******************************************************************!*\
   !*** ./resources/js/pages/Contacts.vue?vue&type=script&lang=js& ***!
   \******************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
