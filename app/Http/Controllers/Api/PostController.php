@@ -10,9 +10,17 @@ use Illuminate\Http\Request;
 class PostController extends Controller {
     use SlugGenerator;
 
-    public function index() {
-        $posts = Post::paginate(4);
+    public function index(Request $request) {
+        // filtrare i dati
+        $filter = $request->input("filter");
 
+        // paginazione
+        if($filter) {
+            $posts = Post::where("title", "LIKE", "%$filter%")->paginate(4);
+        } else {
+            $posts = Post::paginate(4);
+        }
+    
         // Per poter leggere e stampare in Vue i dettagli dello user 
         $posts->load("user", "category", "tags");
 

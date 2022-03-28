@@ -4,6 +4,16 @@
         <h1 v-else>Ciao, benvenut* nel Vue Blog!</h1>
         <h2>Post più recenti</h2>
 
+        <!-- FILTRO -->
+        <div class="my-4">
+            <input type="text" 
+                class="form-text" 
+                placeholder="Cosa cerchi?"
+                v-model="searchText"
+                @keydown.enter="onSearchSubmit"
+            > 
+        </div>
+
         <!-- BOTTONE RICARIDA DATI -->
         <div class="d-flex justify-content-end">
             <button class="btn btn-primary" @click="fetchPosts">
@@ -60,13 +70,13 @@ export default {
         return {
             posts: [],
             pagination: {},
-            // è true di deafult perchè all'apertura della pagina carico i dati 
-            loading: true,
+            loading: true,  // è true di deafult perchè all'apertura della pagina carico i dati 
             user: null,
+            searchText: "",
         };
     },
     methods: {
-        async fetchPosts(page = 1) {
+        async fetchPosts(page = 1, searchText = null) {
             if(page < 1) {
 				page = 1;
 			}
@@ -84,7 +94,12 @@ export default {
             // Prima della chiamata axios setto a true
             this.loading = true;
             // So già il promise aspetterà che il browser esegua questa riga di codice *
-            const response = await axios.get("/api/posts?page=" + page);
+            const response = await axios.get("/api/posts?page=", {
+                params: {
+                    page,
+                    filter: searchText,
+                }
+            });
             this.pagination= response.data;
             this.posts = response.data.data;
 
@@ -103,6 +118,9 @@ export default {
             }
             // console.log(this.user);
         },
+        onSearchSubmit(page = 1) {
+            this.fetchPosts(1, this.searchText)
+        }
     },
     mounted() {
         this.fetchPosts();

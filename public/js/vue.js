@@ -2355,6 +2355,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2365,9 +2375,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       posts: [],
       pagination: {},
-      // è true di deafult perchè all'apertura della pagina carico i dati 
       loading: true,
-      user: null
+      // è true di deafult perchè all'apertura della pagina carico i dati 
+      user: null,
+      searchText: ""
     };
   },
   methods: {
@@ -2376,12 +2387,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var page, response;
+        var page, searchText, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
+                searchText = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : null;
 
                 if (page < 1) {
                   page = 1;
@@ -2398,10 +2410,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this.loading = true; // So già il promise aspetterà che il browser esegua questa riga di codice *
 
-                _context.next = 6;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts?page=" + page);
+                _context.next = 7;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/posts?page=", {
+                  params: {
+                    page: page,
+                    filter: searchText
+                  }
+                });
 
-              case 6:
+              case 7:
                 response = _context.sent;
                 _this.pagination = response.data;
                 _this.posts = response.data.data; // * Dopo la chiamata axios metto un setTimeout perchè la chiamata è talmente veloce 
@@ -2411,7 +2428,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this.loading = false;
                 }, 1000);
 
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
@@ -2428,6 +2445,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.user = null;
       } // console.log(this.user);
 
+    },
+    onSearchSubmit: function onSearchSubmit() {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      this.fetchPosts(1, this.searchText);
     }
   },
   mounted: function mounted() {
@@ -4889,7 +4910,7 @@ var render = function () {
                 attrs: {
                   type: "email",
                   id: "exampleFormControlInput1",
-                  placeholder: "Elisa Salva",
+                  placeholder: "Inserisci il tuo nome e cognome",
                 },
                 domProps: { value: _vm.formData.name },
                 on: {
@@ -5081,6 +5102,39 @@ var render = function () {
       : _c("h1", [_vm._v("Ciao, benvenut* nel Vue Blog!")]),
     _vm._v(" "),
     _c("h2", [_vm._v("Post più recenti")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "my-4" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchText,
+            expression: "searchText",
+          },
+        ],
+        staticClass: "form-text",
+        attrs: { type: "text", placeholder: "Cosa cerchi?" },
+        domProps: { value: _vm.searchText },
+        on: {
+          keydown: function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.onSearchSubmit.apply(null, arguments)
+          },
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchText = $event.target.value
+          },
+        },
+      }),
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "d-flex justify-content-end" }, [
       _c(
@@ -20918,15 +20972,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./resources/js/pages/Contacts.vue ***!
   \*****************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Contacts_vue_vue_type_template_id_2d69ed48___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Contacts.vue?vue&type=template&id=2d69ed48& */ "./resources/js/pages/Contacts.vue?vue&type=template&id=2d69ed48&");
 /* harmony import */ var _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Contacts.vue?vue&type=script&lang=js& */ "./resources/js/pages/Contacts.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Contacts_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -20956,7 +21009,7 @@ component.options.__file = "resources/js/pages/Contacts.vue"
 /*!******************************************************************!*\
   !*** ./resources/js/pages/Contacts.vue?vue&type=script&lang=js& ***!
   \******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

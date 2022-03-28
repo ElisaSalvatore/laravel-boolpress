@@ -9,7 +9,7 @@
           <input 
             type="email" class="form-control" 
             id="exampleFormControlInput1" 
-            placeholder="Elisa Salva"
+            placeholder="Inserisci il tuo nome e cognome"
             v-model="formData.name"
           >
           <span class="text-danger" 
