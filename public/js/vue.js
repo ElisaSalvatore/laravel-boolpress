@@ -2211,10 +2211,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                response = axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
-                response.data;
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this.formData);
 
               case 2:
+                response = _context.sent;
+                response.data;
+
+              case 4:
               case "end":
                 return _context.stop();
             }

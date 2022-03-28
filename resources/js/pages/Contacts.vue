@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     async formSubmit() {
-      const response = axios.post("/api/contacts", this.formData)
+      const response = await axios.post("/api/contacts", this.formData)
 
       response.data
     }
