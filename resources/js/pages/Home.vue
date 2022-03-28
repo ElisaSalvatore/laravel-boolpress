@@ -4,23 +4,22 @@
         <h1 v-else>Ciao, benvenut* nel Vue Blog!</h1>
         <h2>Post più recenti</h2>
 
-        <!-- FILTRO -->
-        <div class="my-4">
+        <div class="my-4 d-flex justify-content-between align-items-center">
+            <!-- FILTRO -->
             <input type="text" 
                 class="form-text" 
-                placeholder="Cosa cerchi?"
+                placeholder="Cerca titolo post"
                 v-model="searchText"
                 @keydown.enter="onSearchSubmit"
             > 
-        </div>
 
-        <!-- BOTTONE RICARIDA DATI -->
-        <div class="d-flex justify-content-end">
+            <!-- BOTTONE RICARIDA DATI -->
             <button class="btn btn-primary" @click="fetchPosts">
                 <i class="fa-solid fa-rotate-right"></i> Ricarica Dati
             </button>
-        </div> 
+        </div>
 
+        <!-- PROGRESS BAR -->
         <div class="progress my-3" v-if="loading">
             <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
                 Caricamento...

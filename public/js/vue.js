@@ -1967,6 +1967,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2364,7 +2366,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2631,7 +2632,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  max-height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n}", ""]);
+exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  min-height: 220px;\n  max-height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n  width: 100%;\n  overflow: hidden;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}", ""]);
 
 // exports
 
@@ -4629,16 +4630,18 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("h5", { staticClass: "card-title" }, [
-          _vm._v(_vm._s(_vm.post.title)),
+        _c("div", { staticClass: "py-2" }, [
+          _c("h5", { staticClass: "card-title" }, [
+            _vm._v(_vm._s(_vm.post.title)),
+          ]),
+          _vm._v(" "),
+          _c("p", {
+            staticClass: "card-text",
+            domProps: { innerHTML: _vm._s(_vm.post.content) },
+          }),
         ]),
         _vm._v(" "),
-        _c("p", {
-          staticClass: "card-text",
-          domProps: { innerHTML: _vm._s(_vm.post.content) },
-        }),
-        _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "py-2" }, [
           _vm._v("\n                Autore: "),
           _c("em", { staticClass: "mr-2" }, [
             _vm._v(_vm._s(_vm.post.user.name) + " "),
@@ -4651,13 +4654,17 @@ var render = function () {
         _vm._v(" "),
         _vm.post.category
           ? _c("div", { staticClass: "d-inline mb-2 mr-2" }, [
-              _c("span", { staticClass: "bg-success rounded p-1 text-white" }, [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.post.category.code) +
-                    "\n                "
-                ),
-              ]),
+              _c(
+                "span",
+                { staticClass: "badge bg-success rounded p-1 text-white" },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.post.category.code) +
+                      "\n                "
+                  ),
+                ]
+              ),
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -4668,7 +4675,10 @@ var render = function () {
               _vm._l(_vm.post.tags, function (tag) {
                 return _c(
                   "span",
-                  { key: tag.id, staticClass: "bg-warning rounded p-1 mr-2" },
+                  {
+                    key: tag.id,
+                    staticClass: "badge bg-warning rounded p-1 mr-2",
+                  },
                   [
                     _vm._v(
                       " \n                    " +
@@ -5103,49 +5113,51 @@ var render = function () {
     _vm._v(" "),
     _c("h2", [_vm._v("Post più recenti")]),
     _vm._v(" "),
-    _c("div", { staticClass: "my-4" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.searchText,
-            expression: "searchText",
+    _c(
+      "div",
+      { staticClass: "my-4 d-flex justify-content-between align-items-center" },
+      [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.searchText,
+              expression: "searchText",
+            },
+          ],
+          staticClass: "form-text",
+          attrs: { type: "text", placeholder: "Cerca titolo post" },
+          domProps: { value: _vm.searchText },
+          on: {
+            keydown: function ($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.onSearchSubmit.apply(null, arguments)
+            },
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.searchText = $event.target.value
+            },
           },
-        ],
-        staticClass: "form-text",
-        attrs: { type: "text", placeholder: "Cosa cerchi?" },
-        domProps: { value: _vm.searchText },
-        on: {
-          keydown: function ($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
-            return _vm.onSearchSubmit.apply(null, arguments)
-          },
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.searchText = $event.target.value
-          },
-        },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "d-flex justify-content-end" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.fetchPosts } },
-        [
-          _c("i", { staticClass: "fa-solid fa-rotate-right" }),
-          _vm._v(" Ricarica Dati\n        "),
-        ]
-      ),
-    ]),
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", on: { click: _vm.fetchPosts } },
+          [
+            _c("i", { staticClass: "fa-solid fa-rotate-right" }),
+            _vm._v(" Ricarica Dati\n        "),
+          ]
+        ),
+      ]
+    ),
     _vm._v(" "),
     _vm.loading
       ? _c("div", { staticClass: "progress my-3" }, [

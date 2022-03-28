@@ -30,7 +30,7 @@
                                                                                                                 {{-- se c'è un actegoria selezionata stampa il code, altrimenti stampa "senza categoria"--}}
                                 </div>
                                 
-                                <div class="ms-auto">
+                                <div class="ms-auto d-flex justify-content-between align-items-center">
                                     <a href="{{ route('admin.posts.show', $post->slug) }}" class="btn btn-link" title="Mostra" >
                                         <i class="fa-solid fa-eye"></i>
                                     </a>

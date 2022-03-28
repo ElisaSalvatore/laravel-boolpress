@@ -4,11 +4,13 @@
             <img :src="getPostCover(post)" class="card-img-top" alt="post images">
             
             <div class="card-body">
-                <h5 class="card-title">{{ post.title }}</h5>
-                <p class="card-text" v-html="post.content"></p>
+                <div class="py-2">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text" v-html="post.content"></p>
+                </div>
             
                 <!-- Autore e data -->
-                <div>
+                <div class="py-2">
                     Autore: <em class="mr-2">{{ post.user.name }} </em>
                     Data: <em>{{ formatDate(post.created_at) }}</em>
                 </div>
@@ -17,7 +19,7 @@
 
                 <!-- Categoria -->
                 <div v-if="post.category" class="d-inline mb-2 mr-2">
-                    <span class="bg-success rounded p-1 text-white">
+                    <span class="badge bg-success rounded p-1 text-white">
                         {{ post.category.code }}
                     </span>
                 </div>
@@ -27,7 +29,7 @@
                     <span
                         v-for="tag in post.tags"
                         :key="tag.id"
-                        class="bg-warning rounded p-1 mr-2"
+                        class="badge bg-warning rounded p-1 mr-2"
                         > 
                         {{ tag.name }}
                     </span>
@@ -68,6 +70,7 @@ export default {
         max-height: 550px;
 
         .card-img-top {
+            min-height: 220px;
             max-height: 250px;
             object-fit: cover;
         }
@@ -76,6 +79,11 @@ export default {
 
             .card-text {
                 height: 30px;
+                width : 100%;
+                overflow: hidden;
+                display: inline-block;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
     }
