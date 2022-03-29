@@ -19,8 +19,15 @@
                         <a href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
                     </div>
                 </div>
-
+                
                 <div class="card-body">
+                    {{-- post image --}}
+                    @if ($post->coverImg)
+                        <img src="{{ asset("storage/" . $post->coverImg ) }}" alt="" class="img-fluid mb-3">
+                    @else
+                        <img src="https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png" alt="" class="img-fluid mb-3" style="width:1024px; height:380px;">
+                    @endif
+
                     {{-- {{ $post->content }} --}}
                     <p class="lead">
                         {!! $post->content !!}

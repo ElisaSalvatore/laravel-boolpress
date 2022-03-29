@@ -8,6 +8,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class PostController extends Controller
 {
@@ -54,6 +55,7 @@ class PostController extends Controller
             "content"=> "required|min:20",
             "category_id"=> "nullable",
             "tags" => "nullable",
+            "coverImg" => "nullable|image"
         ]);
         
         // dd($data);
@@ -157,7 +159,9 @@ class PostController extends Controller
             "category_id" => "nullable|exists:tags,id",
             // Validazione tags
             "tags" => "nullable|exists:tags,id",
+            "coverImg" => "nullable|image"
         ]);
+
         $post = Post::findOrFail($id);
 
         // Se l'utente modifica il titolo del post, di conseguenza cambia anche lo slug:
@@ -194,6 +198,16 @@ class PostController extends Controller
         
         $post->update($data);
 
+        // controlliamo se la coverImg esiste o no
+        // Se data contiene la chiave “coverImg”, indica che l’utente sta caricando un file.
+        if(key_exists("coverImg", $data)) {
+            $coverImg = Storage::put("postsCovers", $data["coverImg"]);
+
+            $post->coverImg = $coverImg;
+            $post->save();
+        }
+
+        // controlliamo se i tags esistono o no
         if (key_exists("tags", $data)) {
             // Aggiorniamo anche la tabella ponte POST_TAG
             // SYNC
