@@ -29,7 +29,8 @@
               <div class="mb-3">
                 <label>Immagine di copertina del post:</label>
                 <input type="file" name="coverImg" class="form-control @error('coverImg') is-invalid @enderror"
-                  placeholder="Inserisci un'immagine">
+                  placeholder="Inserisci un'immagine"
+                >
                 <span>{{ $post->coverImg }}</span>
                 @error('coverImg')
                   <div class="invalid-feedback">{{ $message }}</div>

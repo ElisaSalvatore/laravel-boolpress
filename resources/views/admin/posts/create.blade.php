@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.posts.store') }}" method="post">
+                    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data>
                         @csrf
           
                         {{-- titolo --}}
@@ -20,6 +20,17 @@
                                 placeholder="Inserisci il titolo" value="{{ old('title') }}" required
                             >
                             @error('title')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        {{-- cover immagine --}}
+                        <div class="mb-3">
+                            <label>Immagine di copertina del post:</label>
+                            <input type="file" name="coverImg" class="form-control @error('coverImg') is-invalid @enderror"
+                            placeholder="Inserisci un'immagine"
+                            >
+                            @error('coverImg')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

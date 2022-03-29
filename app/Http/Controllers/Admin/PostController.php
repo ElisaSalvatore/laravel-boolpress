@@ -201,6 +201,11 @@ class PostController extends Controller
         // controlliamo se la coverImg esiste o no
         // Se data contiene la chiave “coverImg”, indica che l’utente sta caricando un file.
         if(key_exists("coverImg", $data)) {
+            //controllo se a db esiste già un'immagine
+            if($post->coverImg) {
+                Storage::delete($post->coverImg);
+            }
+
             $coverImg = Storage::put("postsCovers", $data["coverImg"]);
 
             $post->coverImg = $coverImg;

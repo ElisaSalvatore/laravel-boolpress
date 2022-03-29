@@ -23,7 +23,7 @@
                 <div class="card-body">
                     {{-- post image --}}
                     @if ($post->coverImg)
-                        <img src="{{ asset("storage/" . $post->coverImg ) }}" alt="" class="img-fluid mb-3">
+                        <img src="{{ asset("storage/" . $post->coverImg ) }}" alt="" class="img-fluid mb-3" style="width:1024px; height:380px;">
                     @else
                         <img src="https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png" alt="" class="img-fluid mb-3" style="width:1024px; height:380px;">
                     @endif
