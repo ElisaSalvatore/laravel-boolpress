@@ -24,6 +24,17 @@ class PostController extends Controller {
         // Per poter leggere e stampare in Vue i dettagli dello user 
         $posts->load("user", "category", "tags");
 
+        //Ciclo la collection di dati 
+        $posts->each(function($post) {
+            //se il post ha una coverImg, allora sostituisco il valore con l'URl
+            // completo per quell'immagine
+            if($post->coverImg) {
+                $post->coverImg = asset("storage/" . $post->coverImg);
+            } else {
+                $post->coverImg = 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png';
+            }
+        });
+
         // Ritornare i dati tramite JSON
         return response()->json($posts);
     }

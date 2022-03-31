@@ -55,7 +55,10 @@ export default {
     methods: {
         getPostCover(post) {
             return (
-                post.coverImg ?? 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png'
+                //Ritorno il placeholder lato serve in Api/PostController index(),
+                // quindi mi basta ritornare semplicemente coverImg
+                //post.coverImg ?? 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png'
+                post.coverImg
             );
         },
         formatDate(date) {
@@ -70,8 +73,7 @@ export default {
         max-height: 550px;
 
         .card-img-top {
-            min-height: 220px;
-            max-height: 250px;
+            height: 250px;
             object-fit: cover;
         }
 

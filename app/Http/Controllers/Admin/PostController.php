@@ -94,6 +94,14 @@ class PostController extends Controller
         // Per recuperare l'id dell'utente loggato
         $post->user_id = Auth::user()->id;
 
+        // controlliamo se la coverImg esiste o no
+        // Se data contiene la chiave “coverImg”, indica che l’utente sta caricando un file.
+        if(key_exists("coverImg", $data)) {
+            $coverImg = Storage::put("postsCovers", $data["coverImg"]);
+
+            $post->coverImg = $coverImg;
+        }
+
         $post->save();
 
         // Per il post corrente, aggiungo le relazioni con i tag ricevuti

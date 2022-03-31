@@ -1976,9 +1976,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getPostCover: function getPostCover(post) {
-      var _post$coverImg;
-
-      return (_post$coverImg = post.coverImg) !== null && _post$coverImg !== void 0 ? _post$coverImg : 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png';
+      return (//Ritorno il placeholder lato serve in Api/PostController index(),
+        // quindi mi basta ritornare semplicemente coverImg
+        //post.coverImg ?? 'https://blumagnolia.ch/wp-content/uploads/2021/05/placeholder-126.png'
+        post.coverImg
+      );
     },
     formatDate: function formatDate(date) {
       return dayjs__WEBPACK_IMPORTED_MODULE_0___default()(date).format('DD/MM/YYYY (HH:mm)');
@@ -2632,7 +2634,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  min-height: 220px;\n  max-height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n  width: 100%;\n  overflow: hidden;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}", ""]);
+exports.push([module.i, ".card[data-v-1324358a] {\n  max-height: 550px;\n}\n.card .card-img-top[data-v-1324358a] {\n  height: 250px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.card .card-body .card-text[data-v-1324358a] {\n  height: 30px;\n  width: 100%;\n  overflow: hidden;\n  display: inline-block;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}", ""]);
 
 // exports
 
