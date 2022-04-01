@@ -10,9 +10,8 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data>
+                    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
-          
                         {{-- titolo --}}
                         <div class="mb-3">
                             <label>Titolo</label>
@@ -74,7 +73,7 @@
                           <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Annulla</a>
                           <button type="submit" class="btn btn-success">Salva post</button>
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>

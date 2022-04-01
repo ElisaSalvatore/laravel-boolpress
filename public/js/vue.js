@@ -2559,6 +2559,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2610,7 +2616,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee, null, [[0, 7]]);
       }))();
-    }
+    } // async deletePost() {
+    //     try {
+    //         await axios.delete("api/posts/" + this.$route.params.post);
+    //         //una volta cancellato il post rimando l'utente nella pagina index
+    //         this.$router.replace({ name: "posts.index" });
+    //     } catch (er) {
+    //         console.log(er);
+    //     }
+    // }
+
   },
   mounted: function mounted() {
     this.fetchPost();

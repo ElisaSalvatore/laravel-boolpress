@@ -31,6 +31,12 @@
         
         <h5 class="mt-4">Data ultima modifica</h5>
         <div>{{ updatedAt }}</div>
+
+        <!-- <div class="d-flex justify-content-end">
+            <button @click="deletePost" class="btn btn-danger mt-4">
+                Cancella post
+            </button>
+        </div> -->
     
     </div>
 </template>
@@ -62,7 +68,17 @@ export default {
             } catch (error) {
                 this.$router.replace({name: "error"})
             }
-        }
+        }, 
+        // async deletePost() {
+        //     try {
+        //         await axios.delete("api/posts/" + this.$route.params.post);
+
+        //         //una volta cancellato il post rimando l'utente nella pagina index
+        //         this.$router.replace({ name: "posts.index" });
+        //     } catch (er) {
+        //         console.log(er);
+        //     }
+        // }
     },
     mounted() {
         this.fetchPost();

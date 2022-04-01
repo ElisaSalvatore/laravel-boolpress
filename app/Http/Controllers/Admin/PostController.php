@@ -243,16 +243,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $post = Post::findOrFail($id);
 
         $post->tags()->detach();
 
-        // $post->destroy();
+        if($post->coverImg) {
+            Storage::delete($post->coverImg);
+        }
+
         $post->delete();
 
-        return redirect()->route("admin.posts.index");
+        return response();
     }
 
     // FUNZIONE DELLO SLUG con l'obiettivo di non ripetere codice uguale
