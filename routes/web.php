@@ -42,6 +42,8 @@ Route::middleware("auth")
   // Creo le rotte di Users usando ::resource()
   Route::resource("users", "UserController");
   // Route::get("users", "UserController@index")->name("users.index");
+
+  Route::get("contacts", "ContactController@index")->name("contacts.index");
 });
 
 // Rotta generica creata per evitare l'errore 404 nel caso in cui venga inserita 

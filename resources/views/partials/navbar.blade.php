@@ -21,6 +21,11 @@
                         Users
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.contacts.index') }}" role="button">
+                      Contacts
+                    </a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

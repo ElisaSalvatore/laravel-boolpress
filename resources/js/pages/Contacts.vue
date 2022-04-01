@@ -4,11 +4,13 @@
 
     <div v-if="!formSubmitted">
       <div>
+        <!-- Nome -->
         <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Nome e Cognome:</label>
+          <label for="exampleFormControlInput2" class="form-label">Nome e Cognome:</label>
           <input 
-            type="email" class="form-control" 
-            id="exampleFormControlInput1" 
+            type="email" 
+            class="form-control" 
+            id="exampleFormControlInput2" 
             placeholder="Inserisci il tuo nome e cognome"
             v-model="formData.name"
           >
@@ -18,6 +20,7 @@
           </span>
         </div>
 
+        <!-- Indirizzo email -->
         <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Indirizzo Email:</label>
           <input 
@@ -33,6 +36,7 @@
           </span>
         </div>
 
+        <!-- Messaggio -->
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">Messaggio:</label>
           <textarea 
@@ -47,6 +51,23 @@
               {{formValidationErrors.message}} 
           </span>
         </div>
+
+        <!-- File allegato -->
+        <div class="mb-3">
+          <label for="exampleFormControlInput3" class="form-label">Allegato:</label>
+          <input 
+            type="file" 
+            class="form-control" 
+            id="exampleFormControlInput3" 
+            placeholder="Inserisci il tuo nome e cognome"
+            @change="onAttachmentChange"
+          >
+          <span class="text-danger" 
+            v-if="formValidationErrors && formValidationErrors.attachment"> 
+              {{formValidationErrors.attachment}} 
+          </span>
+        </div>
+
       </div>
 
       <div>
@@ -72,6 +93,7 @@ export default {
         name: "",
         email: "",
         message: "",
+        attachment: null
       },
       formValidationErrors: null
     };
@@ -81,7 +103,15 @@ export default {
       try {
         this.formValidationErrors = null;
         
-        const resp = await axios.post("/api/contacts", this.formData);
+        //formData manuale per inviare al server dei dati scritti come se fosse un oggetto 
+        //però vengono inviati con un multipart/form-data e quindi vengono convertiti e decriptati correttamente.  
+        const formDataInstance = new FormData(); 
+        formDataInstance.append("name", this.formData.name);
+        formDataInstance.append("email", this.formData.email);
+        formDataInstance.append("message", this.formData.message);
+        formDataInstance.append("attachment", this.formData.attachment);
+
+        const resp = await axios.post("/api/contacts", formDataInstance);
         
         //resp.data;
         this.formSubmitted = true;
@@ -95,6 +125,10 @@ export default {
           + er.response.data.message
         );
       }
+    },
+    onAttachmentChange(event) {
+      // console.log(event);
+      this.formData.attachment = event.target.files[0];
     }
   },
 }
