@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Contact;
 use App\Http\Controllers\Controller;
+use App\Mail\NewSiteContactMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller {
@@ -13,7 +15,7 @@ class ContactController extends Controller {
             "name" => "nullable|string",
             "email" => "required|email",
             "message" => "required|string",
-            "attachment" => "nullable|file"
+            "attachment" => "nullable"
         ]);
 
         $newContact = new Contact();
@@ -24,6 +26,9 @@ class ContactController extends Controller {
         };
 
         $newContact->save();
+
+        // permette l'invio della mail
+        Mail::to("admin@gmail.com")->send(new NewSiteContactMail($newContact));
 
         // ritornare il contatto appena creato sotto forma di JSON
         return response()->json($newContact);
