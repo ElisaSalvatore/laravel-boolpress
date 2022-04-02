@@ -11,8 +11,10 @@
                         <a href="{{ route('admin.posts.index') }}" class="btn btn-link">
                             <i class="fa-solid fa-arrow-left"></i>
                         </a>
-                        
-                        {{ $post->title }}
+
+                        <span>
+                            {{ $post->title }}
+                        </span>
                     </div>
                     
                     <div>

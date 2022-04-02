@@ -8,6 +8,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 class PostController extends Controller
@@ -17,12 +18,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         // L'utente loggato può vedere i post di tutti, sia i suoi che quelli degli altri utenti:
         // $posts = Post::all();
         // L'utente loggato può vedere SOLO i post creati da se stesso:
-        $posts = Post::where("user_id", Auth::user()->id)->get();
+        $posts = Post::where("user_id", Auth::user()->id)->withTrashed()->get();
 
         return view("admin.posts.index", compact("posts"));
     }
@@ -32,8 +32,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         // Per recuperare i dati della tabella categories da db
         $categories = Category::all();
         // Per recuperare i dati della tabella tags da db
@@ -121,8 +120,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
-    {
+    public function show($slug) {
         // uso where() perche con l'independent injection è possibile passare solamente $id, ma noi stiamo passando lo $slug
         $post = Post::where("slug", $slug)->first(); 
 
@@ -244,17 +242,25 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $post = Post::findOrFail($id);
+        $post = Post::withTrashed()->findOrFail($id);
 
-        $post->tags()->detach();
+        //se un post è in sofDelete lo cancello definitivamente
+        if ($post->trashed()) {
+            //toglie tutti i collegamenti con eventuali tag
+            $post->tags()->detach();
+    
+            if($post->coverImg) {
+                Storage::delete($post->coverImg);
+            }
 
-        if($post->coverImg) {
-            Storage::delete($post->coverImg);
+            $post->forceDelete();
+
+        } else {
+            //eseguiamo il softDelelte
+            $post->delete();
         }
 
-        $post->delete();
-
-        return response();
+        return redirect()->route("admin.posts.index");
     }
 
     // FUNZIONE DELLO SLUG con l'obiettivo di non ripetere codice uguale

@@ -26,8 +26,16 @@
                                         {{ $post->title }}
                                     </a>
                                     {{-- nello stampare la categoria facciamo un IF, perchè potrebbe non averla --}}
+                                    {{-- se c'è un categoria selezionata stampa il code, altrimenti stampa "senza categoria"--}}
                                     <small class="fst-italic">{{ $post->created_at->format("d-m-Y") }} - {{ $post->user->name }} - {{ isset($post->category) ? $post->category->code : "senza categoria" }} </small>
-                                                                                                                {{-- se c'è un actegoria selezionata stampa il code, altrimenti stampa "senza categoria"--}}
+                                    
+                                    {{-- per capire se un elemento è in fase di softDelete --}}
+                                    @if($post->trashed()) 
+                                        <span class="badge rounded-pill bg-danger text-white">
+                                            Cestino
+                                        </span>
+                                    @endif
+                                    
                                 </div>
                                 
                                 <div class="ms-auto d-flex justify-content-between align-items-center">
